@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Carte {
-    private int numero;
+    private int number;
 
-    public Carte(int numero) {
-        this.numero = numero;
+    public Carte(int number) {
+        this.number = number;
     }
 
-    public int getNumero() {
-        return numero;
+    public int getNumber() {
+        return number;
     }
 
     public static List<Carte> genererCartes() {

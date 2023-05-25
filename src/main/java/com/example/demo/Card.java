@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Carte {
+public class Card {
     private int number;
 
-    public Carte(int number) {
+    public Card(int number) {
         this.number = number;
     }
 
@@ -15,23 +15,23 @@ public class Carte {
         return number;
     }
 
-    public static List<Carte> genererCartes() {
-        List<Carte> cartes = new ArrayList<>();
+    public static List<Card> genererCard() {
+        List<Card> cards = new ArrayList<>();
         for (int i = 1; i <= 104; i++) {
-            Carte carte = new Carte(i);
-            cartes.add(carte);
+            Card card = new Card(i);
+            cards.add(card);
         }
-        return cartes;
+        return cards;
     }
 
-    public static void distribuerCartes(List<Joueur> joueurs) {
-        List<Carte> deck = genererCartes();
+    public static void distribuerCard(List<Player> players) {
+        List<Card> deck = genererCard();
         Collections.shuffle(deck);
 
         int index = 0;
-        for (Joueur joueur : joueurs) {
+        for (Player player : players) {
             for (int i = 0; i < 10; i++) {
-                joueur.getCartes().add(deck.get(index));
+                player.getCards().add(deck.get(index));
                 index++;
             }
         }

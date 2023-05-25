@@ -1,0 +1,29 @@
+.square-button {
+    -fx-min-width: 75px;
+    -fx-max-width: 75px;
+    -fx-min-height: 75px;
+    -fx-max-height: 75px;
+}
+.player-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+.card-rectangle {
+    -fx-fill: white;
+    -fx-stroke: black;
+    -fx-stroke-width: 2;
+    -fx-width: 30px;
+    -fx-height: 40px;
+    -fx-font-size: 14px;
+    -fx-font-weight
+}
+.card-number {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+
+.card-number {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}

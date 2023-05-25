@@ -1,23 +1,163 @@
 package com.example.demo;
 
+import com.example.demo.Carte;
+import com.example.demo.Joueur;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.util.List;
 
 public class HelloApplication extends Application {
+
+    private Stage primaryStage;
+    private GridPane gridPane;
+    private VBox player1Cards;
+    private VBox player2Cards;
+
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        primaryStage.setTitle("6 Qui Prend");
+
+        createModeSelectionScene();
+    }
+
+    private void createModeSelectionScene() {
+        VBox root = new VBox();
+        root.setAlignment(Pos.CENTER);
+        root.setSpacing(20);
+        root.setPadding(new Insets(20));
+
+        Label titleLabel = new Label("6 Qui Prend");
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+
+        Button onePlayerButton = new Button("1 Joueur");
+        onePlayerButton.setOnAction(e -> startGame(1));
+
+        Button twoPlayersButton = new Button("2 Joueurs");
+        twoPlayersButton.setOnAction(e -> startGame(2));
+
+        root.getChildren().addAll(titleLabel, onePlayerButton, twoPlayersButton);
+
+        Scene scene = new Scene(root, 400, 300);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private void startGame(int numPlayers) {
+        gridPane = createGridPane();
+        addPlayerLabels(gridPane);
+        addCardsToPlayers(gridPane, numPlayers);
+        addRowsToGridPane(gridPane);
+
+        Scene scene = new Scene(gridPane, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+
+    private GridPane createGridPane() {
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(10));
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setAlignment(Pos.CENTER);
+        return gridPane;
+    }
+    private void addRowsToGridPane(GridPane gridPane) {
+        for (int row = 0; row < 4; row++) {
+            HBox rowBox = new HBox();
+            rowBox.setSpacing(10);
+
+            for (int col = 0; col < 6; col++) {
+                StackPane cardPane = createCardRectangle(row * 6 + col + 1);
+                rowBox.getChildren().add(cardPane);
+            }
+
+            gridPane.add(rowBox, 0, row + 2, 2, 1);
+        }
+    }
+
+
+    private void addPlayerLabels(GridPane gridPane) {
+        Label player1Label = createPlayerLabel("Joueur 1");
+        Label player2Label = createPlayerLabel("Joueur 2");
+
+        gridPane.add(player1Label, 0, 0);
+        gridPane.add(player2Label, 1, 0);
+    }
+
+    private Label createPlayerLabel(String playerName) {
+        Label label = new Label(playerName);
+        label.getStyleClass().add("player-label");
+        return label;
+    }
+
+    private void addCardsToPlayers(GridPane gridPane, int numPlayers) {
+        Joueur joueur1 = new Joueur();
+        Joueur joueur2 = new Joueur();
+
+        List<Joueur> joueurs = List.of(joueur1, joueur2);
+        Carte.distribuerCartes(joueurs);
+
+        player1Cards = createPlayerCards(joueur1);
+        gridPane.add(player1Cards, 0, 1);
+
+        if (numPlayers == 2) {
+            player2Cards = createPlayerCards(joueur2);
+            gridPane.add(player2Cards, 1, 1);
+        }
+    }
+
+    private VBox createPlayerCards(Joueur joueur) {
+        VBox playerCards = new VBox();
+        playerCards.setSpacing(10);
+
+        List<Carte> cartes = joueur.getCartes();
+        for (Carte carte : cartes) {
+            StackPane cardPane = createCardRectangle(carte.getNumero());
+
+            HBox cardBox = new HBox(cardPane);
+            cardBox.setAlignment(Pos.CENTER);
+
+            playerCards.getChildren().add(cardBox);
+        }
+
+        return playerCards;
+    }
+
+
+
+    private StackPane createCardRectangle(int cardNumber) {
+        Rectangle rectangle = new Rectangle(30, 40);
+        rectangle.getStyleClass().add("card-rectangle");
+
+        Text cardNumberText = new Text(String.valueOf(cardNumber));
+        cardNumberText.getStyleClass().add("card-number");
+
+        StackPane cardPane = new StackPane(rectangle, cardNumberText);
+        cardPane.setAlignment(Pos.CENTER);
+
+        return cardPane;
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

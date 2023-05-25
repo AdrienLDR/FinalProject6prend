@@ -71,7 +71,6 @@ public class HelloApplication extends Application {
         primaryStage.show();
     }
 
-
     private GridPane createGridPane() {
         GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(10));
@@ -80,18 +79,25 @@ public class HelloApplication extends Application {
         gridPane.setAlignment(Pos.CENTER);
         return gridPane;
     }
+
     private void addRowsToGridPane(GridPane gridPane) {
         for (int row = 0; row < 4; row++) {
             HBox rowBox = new HBox();
             rowBox.setSpacing(10);
+            rowBox.setAlignment(Pos.CENTER);
 
             for (int col = 0; col < 6; col++) {
                 StackPane cardPane = createCardRectangle(row * 6 + col + 1);
                 rowBox.getChildren().add(cardPane);
             }
 
-            gridPane.add(rowBox, 0, row + 2, 2, 1);
+            gridPane.add(rowBox, 1, 2, 3,  4);
         }
+
+        // Add empty space between player card rows and board rows
+        VBox emptySpace = new VBox();
+        emptySpace.setMinHeight(20); // Adjust the height of the empty space as needed
+        gridPane.add(emptySpace, 1, 6, 1, 1);
     }
 
 
@@ -99,8 +105,8 @@ public class HelloApplication extends Application {
         Label player1Label = createPlayerLabel("Joueur 1");
         Label player2Label = createPlayerLabel("Joueur 2");
 
-        gridPane.add(player1Label, 0, 0);
-        gridPane.add(player2Label, 1, 0);
+        gridPane.add(player1Label, 0, 1);
+        gridPane.add(player2Label, 2, 1);
     }
 
     private Label createPlayerLabel(String playerName) {
@@ -117,11 +123,15 @@ public class HelloApplication extends Application {
         Carte.distribuerCartes(joueurs);
 
         player1Cards = createPlayerCards(joueur1);
-        gridPane.add(player1Cards, 0, 1);
+        HBox player1Container = new HBox(player1Cards);
+        player1Container.setAlignment(Pos.CENTER_LEFT);
+        gridPane.add(player1Container, 0, 2);
 
         if (numPlayers == 2) {
             player2Cards = createPlayerCards(joueur2);
-            gridPane.add(player2Cards, 1, 1);
+            HBox player2Container = new HBox(player2Cards);
+            player2Container.setAlignment(Pos.CENTER_RIGHT);
+            gridPane.add(player2Container, 2, 2);
         }
     }
 
@@ -141,8 +151,6 @@ public class HelloApplication extends Application {
 
         return playerCards;
     }
-
-
 
     private StackPane createCardRectangle(int cardNumber) {
         Rectangle rectangle = new Rectangle(30, 40);

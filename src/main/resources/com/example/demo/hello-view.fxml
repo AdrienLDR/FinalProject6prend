@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
+<HBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloApplication">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <VBox alignment="CENTER" spacing="10.0" />
-
-    <Label fx:id="welcomeText" />
-   <AnchorPane prefHeight="200.0" prefWidth="200.0">
-      <children>
-           <Button layoutX="74.0" layoutY="133.0" onAction="#playMultiplayer" styleClass="square-button" text="2 joueurs" />
-           <Button layoutX="79.0" layoutY="100.0" onAction="#playSinglePlayer" styleClass="square-button" text="1 joueur" />
-         <Label layoutX="86.0" layoutY="41.0" text="6 qui prend" />
-      </children>
-   </AnchorPane>
+    <VBox alignment="CENTER" spacing="10.0">
+        <Label fx:id="welcomeText" />
+        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <Button fx:id="onePlayerButton" layoutX="74.0" layoutY="133.0" styleClass="square-button" text="1 joueur" />
+                <Button fx:id="twoPlayersButton" layoutX="79.0" layoutY="100.0" styleClass="square-button" text="2 joueurs" />
+                <Label layoutX="86.0" layoutY="41.0" text="6 qui prend" />
+            </children>
+        </AnchorPane>
+    </VBox>
 </HBox>

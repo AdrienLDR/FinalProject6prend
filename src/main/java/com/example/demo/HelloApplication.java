@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.Carte;
-import com.example.demo.Joueur;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -81,24 +78,30 @@ public class HelloApplication extends Application {
     }
 
     private void addRowsToGridPane(GridPane gridPane) {
-        for (int row = 0; row < 4; row++) {
-            HBox rowBox = new HBox();
-            rowBox.setSpacing(10);
-            rowBox.setAlignment(Pos.CENTER);
+        // Create a separate GridPane for the board cards
+        GridPane boardPane = new GridPane();
+        boardPane.setAlignment(Pos.CENTER);
+        boardPane.setHgap(10);
+        boardPane.setVgap(10);
 
+        // Add the board cards to the boardPane
+        for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 6; col++) {
                 StackPane cardPane = createCardRectangle(row * 6 + col + 1);
-                rowBox.getChildren().add(cardPane);
+                boardPane.add(cardPane, col, row);
             }
-
-            gridPane.add(rowBox, 1, 2, 3,  4);
         }
+
+        // Add the boardPane to the main gridPane
+        gridPane.add(boardPane, 1, 2, 3, 4);
 
         // Add empty space between player card rows and board rows
         VBox emptySpace = new VBox();
         emptySpace.setMinHeight(20); // Adjust the height of the empty space as needed
         gridPane.add(emptySpace, 1, 6, 1, 1);
     }
+
+
 
 
     private void addPlayerLabels(GridPane gridPane) {

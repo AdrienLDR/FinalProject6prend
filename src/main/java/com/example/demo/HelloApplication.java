@@ -6,6 +6,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -24,6 +29,7 @@ public class HelloApplication extends Application {
     private GridPane gridPane;
     private VBox player1Cards;
     private VBox player2Cards;
+    private Row[] rows;
 
     @Override
     public void start(Stage primaryStage) {
@@ -56,9 +62,11 @@ public class HelloApplication extends Application {
     }
 
     private void startGame(int numPlayers) {
+        createRows();
         gridPane = createGridPane();
         addPlayerLabels(gridPane);
         addCardsToPlayers(gridPane, numPlayers);
+
         addRowsToGridPane(gridPane);
 
         Scene scene = new Scene(gridPane, 800, 600);
@@ -67,6 +75,7 @@ public class HelloApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
     private GridPane createGridPane() {
         GridPane gridPane = new GridPane();
@@ -87,8 +96,18 @@ public class HelloApplication extends Application {
         // Add the board cards to the boardPane
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 6; col++) {
-                StackPane cardPane = createCardRectangle(row * 6 + col + 1);
-                boardPane.add(cardPane, col, row);
+                int rowIndex = row * 6 + col;
+                if (rowIndex < rows.length) {
+                    Row currentRow = rows[rowIndex];
+                    if (!currentRow.getCards().isEmpty()) {
+                        StackPane cardPane = createCardRectangle(currentRow.getCards().get(0));
+
+                        HBox cardBox = new HBox(cardPane);
+                        cardBox.setAlignment(Pos.CENTER);
+
+                        boardPane.add(cardBox, col, row);
+                    }
+                }
             }
         }
 
@@ -102,7 +121,12 @@ public class HelloApplication extends Application {
     }
 
 
-
+    private void createRows() {
+        rows = new Row[24];
+        for (int i = 0; i < 24; i++) {
+            rows[i] = new Row();
+        }
+    }
 
     private void addPlayerLabels(GridPane gridPane) {
         Label player1Label = createPlayerLabel("Joueur 1");
@@ -144,7 +168,7 @@ public class HelloApplication extends Application {
 
         List<Card> cards = player.getCards();
         for (Card card : cards) {
-            StackPane cardPane = createCardRectangle(card.getNumber());
+            StackPane cardPane = createCardRectangle(card);
 
             HBox cardBox = new HBox(cardPane);
             cardBox.setAlignment(Pos.CENTER);
@@ -155,18 +179,73 @@ public class HelloApplication extends Application {
         return playerCards;
     }
 
-    private StackPane createCardRectangle(int cardNumber) {
+    private StackPane createCardRectangle(Card card) {
         Rectangle rectangle = new Rectangle(30, 40);
         rectangle.getStyleClass().add("card-rectangle");
 
-        Text cardNumberText = new Text(String.valueOf(cardNumber));
+        Text cardNumberText = new Text(String.valueOf(card.getNumber()));
         cardNumberText.getStyleClass().add("card-number");
 
         StackPane cardPane = new StackPane(rectangle, cardNumberText);
         cardPane.setAlignment(Pos.CENTER);
 
+        // Activer le glisser-déposer
+        cardPane.setOnDragDetected(event -> {
+            Dragboard dragboard = cardPane.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            content.putString(String.valueOf(card.getNumber()));
+            dragboard.setContent(content);
+            event.consume();
+        });
+
+        cardPane.setOnDragOver(event -> {
+            if (event.getGestureSource() != cardPane && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        cardPane.setOnMouseEntered(event -> {
+            cardPane.setEffect(new DropShadow()); // Appliquer un effet d'ombre ou tout autre effet souhaité
+        });
+
+        cardPane.setOnMouseExited(event -> {
+            cardPane.setEffect(null); // Supprimer l'effet lorsque la souris quitte la carte
+        });
+
+        cardPane.setOnDragDropped(event -> {
+            Dragboard dragboard = event.getDragboard();
+            boolean success = false;
+            if (dragboard.hasString()) {
+                int droppedCardNumber = Integer.parseInt(dragboard.getString());
+                // Ici, vous devez implémenter la logique pour gérer la carte déposée
+                // et trouver la rangée appropriée pour l'ajouter.
+                success = true;
+            }
+            event.setDropCompleted(success);
+            event.consume();
+        });
+        cardPane.setOnMousePressed(event -> {
+            cardPane.setMouseTransparent(true); // Rendre la carte transparente pour pouvoir cliquer à travers
+            cardPane.toFront(); // Amener la carte à l'avant-plan pour qu'elle soit visible lors du déplacement
+            cardPane.setTranslateX(event.getSceneX() - cardPane.getBoundsInParent().getWidth() / 2); // Déplacer la carte horizontalement
+            cardPane.setTranslateY(event.getSceneY() - cardPane.getBoundsInParent().getHeight() / 2); // Déplacer la carte verticalement
+        });
+
+        cardPane.setOnMouseDragged(event -> {
+            cardPane.setTranslateX(event.getSceneX() - cardPane.getBoundsInParent().getWidth() / 2); // Continuer à déplacer la carte horizontalement
+            cardPane.setTranslateY(event.getSceneY() - cardPane.getBoundsInParent().getHeight() / 2); // Continuer à déplacer la carte verticalement
+        });
+
+        cardPane.setOnMouseReleased(event -> {
+            cardPane.setMouseTransparent(false); // Rendre la carte à nouveau cliquable
+        });
+
+        cardPane.setOnDragDone(DragEvent::consume);
+
         return cardPane;
     }
+
 
     public static void main(String[] args) {
         launch(args);

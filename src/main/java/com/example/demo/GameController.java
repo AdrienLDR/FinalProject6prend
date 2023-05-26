@@ -47,7 +47,7 @@ public class GameController {
     }
 
     public void handleLowestCard(Player player, Card card) {
-        Row chosenRow = player.chooseRowToRemove(); // Méthode pour que le joueur choisisse une série à ramasser
+        Row chosenRow = player.chooseRowToRemove(rows); // Méthode pour que le joueur choisisse une série à ramasser
         player.addToTas(chosenRow.getCards()); // Ajoute les cartes à son tas
         chosenRow.clearCards(); // Efface les cartes de la série
         chosenRow.addCard(card); // Ajoute la nouvelle carte à la série

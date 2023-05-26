@@ -119,32 +119,32 @@ public class HelloApplication extends Application {
     }
 
     private void addCardsToPlayers(GridPane gridPane, int numPlayers) {
-        Joueur joueur1 = new Joueur();
-        Joueur joueur2 = new Joueur();
+        Player player1 = new Player();
+        Player player2 = new Player();
 
-        List<Joueur> joueurs = List.of(joueur1, joueur2);
-        Carte.distribuerCartes(joueurs);
+        List<Player> players = List.of(player1, player2);
+        Card.distribuerCard(players);
 
-        player1Cards = createPlayerCards(joueur1);
+        player1Cards = createPlayerCards(player1);
         HBox player1Container = new HBox(player1Cards);
         player1Container.setAlignment(Pos.CENTER_LEFT);
         gridPane.add(player1Container, 0, 2);
 
         if (numPlayers == 2) {
-            player2Cards = createPlayerCards(joueur2);
+            player2Cards = createPlayerCards(player2);
             HBox player2Container = new HBox(player2Cards);
             player2Container.setAlignment(Pos.CENTER_RIGHT);
             gridPane.add(player2Container, 2, 2);
         }
     }
 
-    private VBox createPlayerCards(Joueur joueur) {
+    private VBox createPlayerCards(Player player) {
         VBox playerCards = new VBox();
         playerCards.setSpacing(10);
 
-        List<Carte> cartes = joueur.getCartes();
-        for (Carte carte : cartes) {
-            StackPane cardPane = createCardRectangle(carte.getNumero());
+        List<Card> cards = player.getCards();
+        for (Card card : cards) {
+            StackPane cardPane = createCardRectangle(card.getNumber());
 
             HBox cardBox = new HBox(cardPane);
             cardBox.setAlignment(Pos.CENTER);

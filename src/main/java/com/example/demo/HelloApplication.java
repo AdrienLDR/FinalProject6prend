@@ -123,7 +123,7 @@ public class HelloApplication extends Application {
         Player player2 = new Player();
 
         List<Player> players = List.of(player1, player2);
-        Card.distribuerCard(players);
+        Card.distributeCards(players);
 
         player1Cards = createPlayerCards(player1);
         HBox player1Container = new HBox(player1Cards);

@@ -15,7 +15,7 @@ public class Card {
         return number;
     }
 
-    public static List<Card> genererCard() {
+    public static List<Card> generateCards() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i <= 104; i++) {
             Card card = new Card(i);
@@ -24,8 +24,8 @@ public class Card {
         return cards;
     }
 
-    public static void distribuerCard(List<Player> players) {
-        List<Card> deck = genererCard();
+    public static void distributeCards(List<Player> players) {
+        List<Card> deck = generateCards();
         Collections.shuffle(deck);
 
         int index = 0;

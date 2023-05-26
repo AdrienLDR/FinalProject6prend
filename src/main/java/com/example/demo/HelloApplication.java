@@ -31,21 +31,13 @@ public class HelloApplication extends Application {
     private VBox player2Cards;
     private Row[] rows;
 
-    private Player player1; // Déclarer player1 comme propriété de la classe
-    private Player player2; // Déclarer player2 comme propriété de la classe
-
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("6 Qui Prend");
 
         createModeSelectionScene();
-
-        // Move the call to addCardsToPlayers here
-        gridPane = createGridPane();
-        addCardsToPlayers(gridPane, 2);
     }
-
 
     private void createModeSelectionScene() {
         VBox root = new VBox();
@@ -108,8 +100,7 @@ public class HelloApplication extends Application {
                 if (rowIndex < rows.length) {
                     Row currentRow = rows[rowIndex];
                     if (!currentRow.getCards().isEmpty()) {
-                        StackPane cardPane = createCardRectangle(currentRow.getCards().get(0), player1);
-                        cardPane.setUserData(player1);
+                        StackPane cardPane = createCardRectangle(currentRow.getCards().get(0));
 
                         HBox cardBox = new HBox(cardPane);
                         cardBox.setAlignment(Pos.CENTER);
@@ -169,7 +160,6 @@ public class HelloApplication extends Application {
             player2Container.setAlignment(Pos.CENTER_RIGHT);
             gridPane.add(player2Container, 2, 2, 1, 4);
         }
-
     }
 
 
@@ -179,7 +169,7 @@ public class HelloApplication extends Application {
 
         List<Card> cards = player.getCards();
         for (Card card : cards) {
-            StackPane cardPane = createCardRectangle(card, player);// Pass player as the second argument
+            StackPane cardPane = createCardRectangle(card);
 
             HBox cardBox = new HBox(cardPane);
             cardBox.setAlignment(Pos.CENTER);
@@ -190,9 +180,8 @@ public class HelloApplication extends Application {
         return playerCards;
     }
 
+    private StackPane createCardRectangle(Card card) {
 
-
-    private StackPane createCardRectangle(Card card, Player player) {
         Rectangle rectangle = new Rectangle(30, 40);
         rectangle.getStyleClass().add("card-rectangle");
 
@@ -201,66 +190,37 @@ public class HelloApplication extends Application {
 
         StackPane cardPane = new StackPane(rectangle, cardNumberText);
         cardPane.setAlignment(Pos.CENTER);
-        cardPane.setUserData(player); // Stocke le joueur dans la propriété UserData du cardPane
 
-        setupCardDragAndDrop(cardPane); // Configure le glisser-déposer pour la carte
+
+        cardPane.setOnMouseEntered(event -> {
+            cardPane.setEffect(new DropShadow()); // Appliquer un effet d'ombre ou tout autre effet souhaité
+        });
+
+        cardPane.setOnMouseExited(event -> {
+            cardPane.setEffect(null); // Supprimer l'effet lorsque la souris quitte la carte
+        });
+
+        cardPane.setOnMousePressed(event -> {
+            cardPane.setMouseTransparent(true); // Rendre la carte transparente pour pouvoir cliquer à travers
+            cardPane.toFront(); // Amener la carte à l'avant-plan pour qu'elle soit visible lors du déplacement
+            cardPane.setTranslateX(event.getSceneX() - cardPane.getBoundsInParent().getWidth() / 2); // Déplacer la carte horizontalement
+            cardPane.setTranslateY(event.getSceneY() - cardPane.getBoundsInParent().getHeight() / 2); // Déplacer la carte verticalement
+        });
+
+        cardPane.setOnMouseDragged(event -> {
+            cardPane.setTranslateX(event.getSceneX() - cardPane.getBoundsInParent().getWidth() / 2); // Continuer à déplacer la carte horizontalement
+            cardPane.setTranslateY(event.getSceneY() - cardPane.getBoundsInParent().getHeight() / 2); // Continuer à déplacer la carte verticalement
+        });
+
+        cardPane.setOnMouseReleased(event -> {
+            cardPane.setMouseTransparent(false); // Rendre la carte à nouveau cliquable
+        });
+
+        cardPane.setOnDragDone(DragEvent::consume);
 
         return cardPane;
     }
 
-    private void setupCardDragAndDrop(StackPane cardPane) {
-        // Enable card dragging
-        cardPane.setOnDragDetected(event -> {
-            Dragboard dragboard = cardPane.startDragAndDrop(TransferMode.MOVE);
-            ClipboardContent content = new ClipboardContent();
-            content.putString(String.valueOf(cardPane.getUserData())); // Utilise la propriété UserData pour stocker le numéro de la carte
-            dragboard.setContent(content);
-            event.consume();
-        });
-
-        // Add drop functionality to the board cards
-        cardPane.setOnDragOver(event -> {
-            if (event.getGestureSource() != cardPane && event.getDragboard().hasString()) {
-                event.acceptTransferModes(TransferMode.MOVE);
-            }
-            event.consume();
-        });
-
-        cardPane.setOnDragEntered(event -> {
-            if (event.getGestureSource() != cardPane && event.getDragboard().hasString()) {
-                cardPane.getStyleClass().add("card-drag-over");
-            }
-            event.consume();
-        });
-
-        cardPane.setOnDragExited(event -> {
-            cardPane.getStyleClass().remove("card-drag-over");
-            event.consume();
-        });
-
-        cardPane.setOnDragDropped(event -> {
-            Dragboard dragboard = event.getDragboard();
-            boolean success = false;
-            if (dragboard.hasString()) {
-                Row row = (Row) cardPane.getUserData(); // Récupère la rangée à partir de la propriété UserData
-                int cardNumber = Integer.parseInt(dragboard.getString());
-                Card droppedCard = new Card(cardNumber);
-                if (row.canCardBePlaced(droppedCard)) {
-                    row.addCard(droppedCard);
-                    VBox playerCards = player1Cards.getChildren().contains(cardPane) ? player1Cards : player2Cards; // Sélectionne le bon conteneur de cartes du joueur
-                    playerCards.getChildren().remove(cardPane);
-                    success = true;
-                }
-            }
-            event.setDropCompleted(success);
-            event.consume();
-        });
-
-        cardPane.setOnDragDone(event -> {
-            cardPane.getStyleClass().remove("card-drag-over");
-            event.consume();
-        });
-    }
 
     public static void main(String[] args) {
         launch(args);

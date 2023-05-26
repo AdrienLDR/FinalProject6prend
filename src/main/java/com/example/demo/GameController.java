@@ -1,11 +1,14 @@
 package com.example.demo;
 
+import javafx.scene.control.Label;
+
 import java.util.List;
 
 public class GameController {
     private List<Row> rows;
     private List<Player> players;
     private int currentPlayerIndex;
+    private List<Label> scoreLabels; // Liste de Labels pour afficher les scores des joueurs
 
     public GameController(List<Row> rows, List<Player> players) {
         this.rows = rows;
@@ -15,6 +18,44 @@ public class GameController {
 
     public Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);
+    }
+
+    public void setScoreLabels(List<Label> scoreLabels) {
+        this.scoreLabels = scoreLabels;
+    }
+    public void updateScoreLabels() {
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            int playerScore = player.getTotalPoints();
+            Label scoreLabel = scoreLabels.get(i);
+            scoreLabel.setText("Score du joueur " + (i + 1) + ": " + playerScore);
+        }
+    }
+    public void calculatePoints() {
+        for (Player player : players) {
+            int totalPoints = 0;
+
+            for (Card card : player.getTas()) {
+                int points = calculateCardPoints(card);
+                totalPoints += points;
+            }
+
+            player.setTotalPoints(totalPoints);
+        }
+    }
+
+    private int calculateCardPoints(Card card) {
+        if (card.getNumber() == 55) {
+            return 7;
+        } else if (card.getNumber() % 11 == 0) {
+            return 5;
+        } else if (card.getNumber() % 10 == 0) {
+            return 3;
+        } else if (card.getNumber() % 5 == 0) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 
     public Row getMinDifferenceRow(Card card) {

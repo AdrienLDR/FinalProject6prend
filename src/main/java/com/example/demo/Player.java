@@ -10,6 +10,7 @@ import java.util.Optional;
 public class Player {
     private List<Card> cards;
     private List<Card> tas;
+    private int totalPoints;
 
     public Player() {
         this.cards = new ArrayList<>();
@@ -39,4 +40,10 @@ public class Player {
         return result.orElse(null);
     }
 
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+    public int getTotalPoints() {
+        return totalPoints;
+    }
 }

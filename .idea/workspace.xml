@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="plus d 'erreur">
+    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="deplacement carte">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Row.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Row.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,12 +98,20 @@
       <option name="project" value="LOCAL" />
       <updated>1685085452355</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="deplacement carte">
+      <created>1685089626875</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685089626875</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dadazdzda" />
     <MESSAGE value="plus d 'erreur" />
-    <option name="LAST_COMMIT_MESSAGE" value="plus d 'erreur" />
+    <MESSAGE value="deplacement carte" />
+    <option name="LAST_COMMIT_MESSAGE" value="deplacement carte" />
   </component>
 </project>

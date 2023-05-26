@@ -44,6 +44,7 @@ public class Player {
         this.totalPoints = totalPoints;
     }
     public int getTotalPoints() {
+        //Pour récupérer les points de chaque joueur
         return totalPoints;
     }
 }

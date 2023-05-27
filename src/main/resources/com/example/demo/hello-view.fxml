@@ -18,7 +18,7 @@
             <children>
                 <Button fx:id="onePlayerButton" layoutX="74.0" layoutY="133.0" styleClass="square-button" text="1 player" />
                 <Button fx:id="twoPlayersButton" layoutX="79.0" layoutY="100.0" styleClass="square-button" text="2 players" />
-                <Label layoutX="86.0" layoutY="41.0" text="6 qui prend" />
+                <Label layoutX="86.0" layoutY="41.0" text="7 qui prend" />
             </children>
         </AnchorPane>
     </VBox>

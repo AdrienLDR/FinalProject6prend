@@ -26,9 +26,13 @@
     -fx-arc-width: 10;
     -fx-arc-height: 10;
 }
+.card-drag-over {
+    -fx-border-color: red;
+    -fx-border-width: 2;
+}
 
-.card-label {
-    -fx-background-color: transparent;
-    -fx-padding: 0;
-    -fx-graphic-text-gap: 0;
+.body {
+    -fx-background-image: url("../resources/com/example/demo/MenuBackground.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
 }

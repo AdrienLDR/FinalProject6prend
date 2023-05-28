@@ -11,10 +11,12 @@ public class Player {
     private List<Card> cards;
     private List<Card> tas;
     private int totalPoints;
+    private int totalPenalities;
 
     public Player() {
         this.cards = new ArrayList<>();
         this.tas = new ArrayList<>();
+        this.totalPenalities = 0;
     }
 
     public List<Card> getCards() {
@@ -24,6 +26,22 @@ public class Player {
     public List<Card> getTas() {
         return tas;
     }
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+    public int getTotalPenalities() {
+        return totalPenalities;
+    }
+    public void setTotalPenalities(int totalPenalties) {
+        this.totalPenalities = totalPenalties;
+    }
+
+
+
 
     public void addToTas(List<Card> cards) {
         tas.addAll(cards);
@@ -40,11 +58,5 @@ public class Player {
         return result.orElse(null);
     }
 
-    public void setTotalPoints(int totalPoints) {
-        this.totalPoints = totalPoints;
-    }
-    public int getTotalPoints() {
-        //Pour récupérer les points de chaque joueur
-        return totalPoints;
-    }
+
 }

@@ -58,7 +58,4 @@ public class Card {
         }
     }
 
-    public static void commit{
-        ;
-    }
 }

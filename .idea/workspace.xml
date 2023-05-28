@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="On passe sur sceneBuilder&#10;&#10;V2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" afterDir="false" />
-    </list>
+    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="Ajoute des pénalités&#10;&#10;Ajoute des pénalités et attribution automatique de la valeur des pénalités aux cartes correspondantes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,13 +126,32 @@
       <option name="project" value="LOCAL" />
       <updated>1685206336428</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Ajoute des pénalités&#10;&#10;Ajoute des pénalités et attribution automatique de la valeur des pénalités aux cartes correspondantes">
+      <created>1685309411826</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685309411826</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dadazdzda" />
     <MESSAGE value="On passe sur sceneBuilder" />
     <MESSAGE value="On passe sur sceneBuilder&#10;&#10;V2" />
-    <option name="LAST_COMMIT_MESSAGE" value="On passe sur sceneBuilder&#10;&#10;V2" />
+    <MESSAGE value="Ajoute des pénalités&#10;&#10;Ajoute des pénalités et attribution automatique de la valeur des pénalités aux cartes correspondantes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajoute des pénalités&#10;&#10;Ajoute des pénalités et attribution automatique de la valeur des pénalités aux cartes correspondantes" />
   </component>
 </project>

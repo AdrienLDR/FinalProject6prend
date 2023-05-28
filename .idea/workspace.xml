@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="On passe sur sceneBuilder">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/GameViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/Music.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/game-view.fxml" afterDir="false" />
+    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="On passe sur sceneBuilder&#10;&#10;V2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,11 +27,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -120,12 +115,27 @@
       <option name="project" value="LOCAL" />
       <updated>1685201983213</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="On passe sur sceneBuilder">
+      <created>1685206241863</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685206241863</updated>
+    </task>
+    <task id="LOCAL-00007" summary="On passe sur sceneBuilder&#10;&#10;V2">
+      <created>1685206336428</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1685206336428</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dadazdzda" />
     <MESSAGE value="On passe sur sceneBuilder" />
-    <option name="LAST_COMMIT_MESSAGE" value="On passe sur sceneBuilder" />
+    <MESSAGE value="On passe sur sceneBuilder&#10;&#10;V2" />
+    <option name="LAST_COMMIT_MESSAGE" value="On passe sur sceneBuilder&#10;&#10;V2" />
   </component>
 </project>

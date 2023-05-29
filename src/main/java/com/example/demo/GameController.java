@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class GameController {
+
+
     private List<Row> rows;
     private List<Player> players;
     private int currentPlayerIndex;
@@ -17,6 +19,8 @@ public class GameController {
         this.players = players;
         this.currentPlayerIndex = 0;
     }
+
+
 
     public Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);

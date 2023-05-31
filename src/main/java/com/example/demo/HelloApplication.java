@@ -14,7 +14,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -24,8 +23,11 @@ import java.util.List;
 
 public class HelloApplication extends Application {
 
+
+
     private Stage primaryStage;
     private GridPane gridPane;
+    private HBox cardBarBox;
     private VBox player1Cards;
     private VBox player2Cards;
     private Row[] rows;
@@ -67,6 +69,8 @@ public class HelloApplication extends Application {
         primaryStage.show();
     }
 
+
+
     private void startGame(int numPlayers) {
         createRows();
         gridPane = createGridPane();
@@ -80,6 +84,14 @@ public class HelloApplication extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
+
+
+        cardBarBox = new HBox();
+        cardBarBox.setPadding(new Insets(10, 10, 10, 10));
+        cardBarBox.setSpacing(10);
+        cardBarBox.setAlignment(Pos.CENTER);
+
+        createGridPane().setBottom(cardBarBox);
     }
 
 
@@ -188,21 +200,21 @@ public class HelloApplication extends Application {
     }
 
     private StackPane createCardRectangle(Card card) {
-        Rectangle rectangle = new Rectangle(30, 40);
-        rectangle.getStyleClass().add("card-rectangle");
+
 
         ImageView cardImageView = card.getCardImage();
-        cardImageView.setFitWidth(30);
-        cardImageView.setFitHeight(40);
+        cardImageView.setFitWidth(68);
+        cardImageView.setFitHeight(85);
+        cardImageView.getStyleClass().add("card-image");
 
-        StackPane cardPane = new StackPane(rectangle, cardImageView);
+        StackPane cardPane = new StackPane(cardImageView);
         cardPane.setAlignment(Pos.CENTER);
 
-        cardPane.setOnMouseEntered(event -> {
+        cardImageView.setOnMouseEntered(event -> {
             cardPane.setEffect(new DropShadow()); // Appliquer un effet d'ombre ou tout autre effet souhaité
         });
 
-        cardPane.setOnMouseExited(event -> {
+        cardImageView.setOnMouseExited(event -> {
             cardPane.setEffect(null); // Supprimer l'effet lorsque la souris quitte la carte
         });
 
@@ -211,11 +223,6 @@ public class HelloApplication extends Application {
             cardPane.toFront(); // Amener la carte à l'avant-plan pour qu'elle soit visible lors du déplacement
             cardPane.setTranslateX(event.getSceneX() - cardPane.getBoundsInParent().getWidth() / 2); // Déplacer la carte horizontalement
             cardPane.setTranslateY(event.getSceneY() - cardPane.getBoundsInParent().getHeight() / 2); // Déplacer la carte verticalement
-        });
-
-        cardPane.setOnMouseDragged(event -> {
-            cardPane.setTranslateX(event.getSceneX() - cardPane.getBoundsInParent().getWidth() / 2); // Continuer à déplacer la carte horizontalement
-            cardPane.setTranslateY(event.getSceneY() - cardPane.getBoundsInParent().getHeight() / 2); // Continuer à déplacer la carte verticalement
         });
 
         cardPane.setOnMouseReleased(event -> {

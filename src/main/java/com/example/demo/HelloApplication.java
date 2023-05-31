@@ -1,6 +1,5 @@
 package com.example.demo;
 
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,24 +9,22 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class HelloApplication extends Application {
 
-
-
+    private BorderPane mainPane;
     private Stage primaryStage;
-    private GridPane gridPane;
-    private HBox cardBarBox;
+    private GridPane cardGridPane;
+    private HBox deckCard;
+    private VBox deckIndivCard;
     private VBox player1Cards;
     private VBox player2Cards;
     private Row[] rows;
@@ -38,14 +35,7 @@ public class HelloApplication extends Application {
         primaryStage.setTitle("6 Qui Prend");
 
         createModeSelectionScene();
-
-        // Move the call to addCardsToPlayers here
-        gridPane = createGridPane();
-        addCardsToPlayers(gridPane, 2);
-
     }
-
-
 
     private void createModeSelectionScene() {
         VBox root = new VBox();
@@ -69,75 +59,56 @@ public class HelloApplication extends Application {
         primaryStage.show();
     }
 
-
-
     private void startGame(int numPlayers) {
         createRows();
-        gridPane = createGridPane();
-        addPlayerLabels(gridPane);
-        addCardsToPlayers(gridPane, numPlayers);
+        // Plan avec l'ensemble des éléments du jeu
+        mainPane = new BorderPane();
+        addPlayerLabels(mainPane);
 
-        addRowsToGridPane(gridPane);
+        // Box des cartes des joueurs qui sont sur le Board
+        cardGridPane = new GridPane();
+        cardGridPane.setAlignment(Pos.CENTER);
+        addCardsToPlayers(cardGridPane, numPlayers);
 
-        Scene scene = new Scene(gridPane, 800, 600);
+        // Box des cartes du deck des joueurs (deck entier)
+        deckCard = new HBox();
+        deckCard.setPadding(new Insets(10, 10, 10, 10));
+        deckCard.setSpacing(10);
+        deckCard.setAlignment(Pos.CENTER);
+        addCardsToBottom(deckCard);
+
+
+        // Box des cartes du deck des joueurs (cartes individuelles)
+        deckIndivCard = new VBox();
+        deckIndivCard.setPadding(new Insets(10, 10, 10, 10));
+        deckIndivCard.setSpacing(10);
+
+        mainPane.setBottom(deckCard);
+        mainPane.setLeft(deckIndivCard);
+
+        Scene scene = new Scene(mainPane, 800, 600);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
-        cardBarBox = new HBox();
-        cardBarBox.setPadding(new Insets(10, 10, 10, 10));
-        cardBarBox.setSpacing(10);
-        cardBarBox.setAlignment(Pos.CENTER);
-
-        createGridPane().setBottom(cardBarBox);
     }
 
-
-
-    private GridPane createGridPane() {
-        GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10));
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setAlignment(Pos.CENTER);
-        return gridPane;
-    }
-
-    private void addRowsToGridPane(GridPane gridPane) {
-        // Create a separate GridPane for the board cards
-        GridPane boardPane = new GridPane();
-        boardPane.setAlignment(Pos.CENTER);
-        boardPane.setHgap(10);
-        boardPane.setVgap(10);
-
-        // Add the board cards to the boardPane
-        for (int row = 0; row < 4; row++) {
-            for (int col = 0; col < 6; col++) {
-                int rowIndex = row * 6 + col;
-                if (rowIndex < rows.length) {
-                    Row currentRow = rows[rowIndex];
-                    if (!currentRow.getCards().isEmpty()) {
-                        StackPane cardPane = createCardRectangle(currentRow.getCards().get(0));
-
-                        HBox cardBox = new HBox(cardPane);
-                        cardBox.setAlignment(Pos.CENTER);
-
-                        boardPane.add(cardBox, col, row);
-                    }
-                }
-            }
+    private void addCardsToBottom(HBox deckCard) {
+        List<Card> cards = Card.generateCards();
+        Collections.shuffle(cards);
+        for (int i = 0; i < 10; i++) {
+            Card card = cards.get(i);
+            StackPane cardPane = createCardRectangle(card);
+            deckCard.getChildren().add(cardPane);
         }
-
-        // Add the boardPane to the main gridPane
-        gridPane.add(boardPane, 1, 2, 3, 4);
-
-        // Add empty space between player card rows and board rows
-        VBox emptySpace = new VBox();
-        emptySpace.setMinHeight(20); // Adjust the height of the empty space as needed
-        gridPane.add(emptySpace, 1, 6, 1, 1);
     }
+
+
+    private Card generateCard() {
+        List<Card> cards = Card.generateCards();
+        return cards.remove(0);
+    }
+
 
 
     private void createRows() {
@@ -147,12 +118,11 @@ public class HelloApplication extends Application {
         }
     }
 
-    private void addPlayerLabels(GridPane gridPane) {
+    private void addPlayerLabels(BorderPane mainPane) {
         Label player1Label = createPlayerLabel("Joueur 1");
         Label player2Label = createPlayerLabel("Joueur 2");
 
-        gridPane.add(player1Label, 0, 1);
-        gridPane.add(player2Label, 2, 1);
+        mainPane.setTop(new HBox(player1Label, player2Label));
     }
 
     private Label createPlayerLabel(String playerName) {
@@ -200,8 +170,6 @@ public class HelloApplication extends Application {
     }
 
     private StackPane createCardRectangle(Card card) {
-
-
         ImageView cardImageView = card.getCardImage();
         cardImageView.setFitWidth(68);
         cardImageView.setFitHeight(85);
@@ -211,31 +179,26 @@ public class HelloApplication extends Application {
         cardPane.setAlignment(Pos.CENTER);
 
         cardImageView.setOnMouseEntered(event -> {
-            cardPane.setEffect(new DropShadow()); // Appliquer un effet d'ombre ou tout autre effet souhaité
+            cardPane.setEffect(new DropShadow());
         });
 
         cardImageView.setOnMouseExited(event -> {
-            cardPane.setEffect(null); // Supprimer l'effet lorsque la souris quitte la carte
+            cardPane.setEffect(null);
         });
 
         cardPane.setOnMousePressed(event -> {
-            cardPane.setMouseTransparent(true); // Rendre la carte transparente pour pouvoir cliquer à travers
-            cardPane.toFront(); // Amener la carte à l'avant-plan pour qu'elle soit visible lors du déplacement
-            cardPane.setTranslateX(event.getSceneX() - cardPane.getBoundsInParent().getWidth() / 2); // Déplacer la carte horizontalement
-            cardPane.setTranslateY(event.getSceneY() - cardPane.getBoundsInParent().getHeight() / 2); // Déplacer la carte verticalement
+            cardPane.setMouseTransparent(true);
+            cardPane.toFront();
+            cardPane.setTranslateX(event.getSceneX() - cardPane.getBoundsInParent().getWidth() / 2);
+            cardPane.setTranslateY(event.getSceneY() - cardPane.getBoundsInParent().getHeight() / 2);
         });
 
         cardPane.setOnMouseReleased(event -> {
-            cardPane.setMouseTransparent(false); // Rendre la carte à nouveau cliquable
+            cardPane.setMouseTransparent(false);
         });
 
         cardPane.setOnDragDone(DragEvent::consume);
 
         return cardPane;
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

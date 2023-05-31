@@ -4,115 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="Classement des joueurs&#10;&#10;Classement en fonction des pénalités">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="carte en png">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/10.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/10.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/100.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/100.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/101.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/101.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/102.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/102.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/103.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/103.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/104.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/104.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/12.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/12.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/13.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/13.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/14.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/14.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/15.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/15.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/16.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/16.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/17.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/17.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/18.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/18.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/19.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/19.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/20.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/20.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/21.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/21.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/22.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/22.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/23.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/23.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/24.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/24.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/25.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/25.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/26.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/26.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/27.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/27.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/28.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/28.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/29.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/29.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/30.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/30.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/31.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/31.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/32.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/32.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/33.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/33.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/34.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/34.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/35.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/35.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/36.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/36.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/37.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/37.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/38.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/38.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/39.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/39.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/40.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/40.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/41.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/41.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/42.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/42.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/43.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/43.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/44.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/44.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/45.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/45.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/46.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/46.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/47.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/47.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/48.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/48.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/49.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/49.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/50.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/50.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/51.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/51.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/52.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/52.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/53.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/53.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/54.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/54.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/55.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/55.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/56.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/56.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/57.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/57.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/58.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/58.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/59.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/59.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/60.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/60.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/61.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/61.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/62.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/62.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/63.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/63.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/64.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/64.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/65.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/65.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/66.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/66.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/67.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/67.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/68.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/68.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/69.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/69.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/70.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/70.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/71.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/71.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/72.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/72.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/73.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/73.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/74.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/74.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/75.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/75.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/76.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/76.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/77.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/77.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/78.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/78.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/79.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/79.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/80.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/80.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/81.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/81.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/82.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/82.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/83.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/83.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/84.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/84.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/85.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/85.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/86.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/86.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/87.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/87.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/88.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/88.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/89.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/89.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/9.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/90.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/90.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/91.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/91.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/92.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/92.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/93.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/93.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/94.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/94.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/95.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/95.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/96.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/96.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/97.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/97.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/98.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/98.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/Card/99.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/cards/99.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685372054757</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="carte en png">
+      <created>1685544694445</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1685544694445</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -298,6 +198,7 @@
     <MESSAGE value="On passe sur sceneBuilder&#10;&#10;V2" />
     <MESSAGE value="Ajoute des pénalités&#10;&#10;Ajoute des pénalités et attribution automatique de la valeur des pénalités aux cartes correspondantes" />
     <MESSAGE value="Classement des joueurs&#10;&#10;Classement en fonction des pénalités" />
-    <option name="LAST_COMMIT_MESSAGE" value="Classement des joueurs&#10;&#10;Classement en fonction des pénalités" />
+    <MESSAGE value="carte en png" />
+    <option name="LAST_COMMIT_MESSAGE" value="carte en png" />
   </component>
 </project>

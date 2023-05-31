@@ -1,5 +1,6 @@
 package com.example.demo;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -41,4 +42,7 @@ public class HelloController {
         GameController gameController = new GameController(rows, players);
         gameController.handleLowestCard(player2, lowestCard);
     }
+
+
 }
+

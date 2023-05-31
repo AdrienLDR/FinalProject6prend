@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.Card;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -18,6 +17,36 @@ class Row {
     public Row() {
         this.cards = new ArrayList<>();
     }
+
+    //récupérer la dernière carte de chaque ligne
+    public Card getLastCard() {
+        if (cards.isEmpty()) {
+            return null; // La série est vide, il n'y a pas de dernière carte
+        } else {
+            return cards.get(cards.size() - 1); // Renvoie la dernière carte de la série
+        }
+    }
+    //Savoir combien il y a de cartes
+    public int getColumnSize(int column) {
+        int size = 0;
+        for (Card card : cards) {
+            if (card.getColumn() == column) {
+                size++;
+            }
+        }
+        return size;
+    }
+
+    public int getPointsAfterAddition(Card card) {
+        int points = 0;
+        for (Card existingCard : cards) {
+            if (existingCard.getNumber() < card.getNumber()) {
+                points += existingCard.getPoints();
+            }
+        }
+        return points;
+    }
+
 
     public boolean canCardBePlaced(Card card) {
         if (cards.isEmpty()) {

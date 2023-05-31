@@ -11,6 +11,7 @@ class Card {
     private int number;
     private int penality;
     private ImageView cardImage;
+    private int column;
 
     public Card(int number, ImageView cardImage) {
         this.number = number;
@@ -23,6 +24,14 @@ class Card {
     }
 
     public int getPenality() {
+        return penality;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public int getPoints(){
         return penality;
     }
 

@@ -2,7 +2,6 @@
 
 
     import javafx.application.Application;
-    import javafx.fxml.FXMLLoader;
     import javafx.geometry.Insets;
     import javafx.geometry.Pos;
     import javafx.scene.Scene;
@@ -33,15 +32,15 @@
 
         @Override
         public void start(Stage primaryStage) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
             this.primaryStage = primaryStage;
             primaryStage.setTitle("6 Qui Prend");
 
-
             createModeSelectionScene();
-            primaryStage.setScene(scene);
-            primaryStage.show();
+
+            // Move the call to addCardsToPlayers here
+            gridPane = createGridPane();
+            addCardsToPlayers(gridPane, 2);
+
         }
 
 
@@ -83,6 +82,7 @@
             primaryStage.show();
         }
 
+        
 
         private GridPane createGridPane() {
             GridPane gridPane = new GridPane();

@@ -2,9 +2,13 @@ package com.example.demo;
 
 import javafx.scene.control.Label;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GameController {
+
+
     private List<Row> rows;
     private List<Player> players;
     private int currentPlayerIndex;
@@ -15,6 +19,8 @@ public class GameController {
         this.players = players;
         this.currentPlayerIndex = 0;
     }
+
+
 
     public Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);
@@ -93,4 +99,22 @@ public class GameController {
         chosenRow.clearCards(); // Efface les cartes de la série
         chosenRow.addCard(card); // Ajoute la nouvelle carte à la série
     }
+
+    public void calculateTotalPenalities() {
+        for (Player player : players) {
+            int totalPenalties = 0;
+
+            for (Card card : player.getCards()) {
+                int penalties = card.getPenality();
+                totalPenalties += penalties;
+            }
+
+            player.setTotalPenalities(totalPenalties);
+        }
+
+        Collections.sort(players, Comparator.comparingInt(Player::getTotalPenalities)); //Classement des joueurs par ordre croissant de pénalités
+    }
+
+
+
 }

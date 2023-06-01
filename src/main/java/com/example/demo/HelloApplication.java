@@ -48,28 +48,41 @@ public class HelloApplication extends Application {
     }
 
     private void createModeSelectionScene() {
-        VBox root = new VBox();
-        root.setAlignment(Pos.CENTER);
-        root.setSpacing(20);
-        root.setPadding(new Insets(20));
+        StackPane root = new StackPane();
 
-        ImageView imageView = new ImageView(new Image("C:\\Users\\tourn\\OneDrive - ISEP\\Documents\\GitHub\\FinalProject6prend\\src\\main\\resources\\com\\example\\demo\\logo.png")); // Ajouter le chemin vers l'image
-        Label titleLabel = new Label("6 Qui Prend");
+        // Chargement de l'image de fond
+        ImageView backgroundImage = new ImageView(new Image("C:\\Users\\tourn\\OneDrive - ISEP\\Documents\\GitHub\\FinalProject6prend\\src\\main\\resources\\com\\example\\demo\\MenuBackground.png")); // Remplacez "fond.jpg" par le chemin vers votre image de fond
+        backgroundImage.setFitWidth(800);
+        backgroundImage.setFitHeight(600);
+        backgroundImage.setPreserveRatio(true);
+
+        // Contenu de l'interface utilisateur
+        VBox contentBox = new VBox();
+        contentBox.setAlignment(Pos.CENTER);
+        contentBox.setSpacing(20);
+        contentBox.setPadding(new Insets(20));
+
+
+        Label titleLabel = new Label("Bienvenue !");
         titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
 
-        HBox imageBox = new HBox(imageView);
-        imageBox.setAlignment(Pos.CENTER);
 
         Button onePlayerButton = new Button("1 Joueur");
         onePlayerButton.setOnAction(e -> startGame(1));
+
         Button twoPlayersButton = new Button("2 Joueurs");
         twoPlayersButton.setOnAction(e -> startGame(2));
 
-        root.getChildren().addAll(imageBox, titleLabel, onePlayerButton, twoPlayersButton);
+        contentBox.getChildren().addAll(titleLabel, onePlayerButton, twoPlayersButton);
+
+        // Ajout des éléments au conteneur principal
+        root.getChildren().addAll(backgroundImage, contentBox);
+
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
     private void startGame(int numPlayers) {
         createRows();

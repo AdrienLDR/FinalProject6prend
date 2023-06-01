@@ -56,14 +56,16 @@ class Card {
 
 
 
-    public boolean setFaceUp(Card card) {
-        if (!card.isFaceUp(card)) {
+    public boolean setFaceUp() {
+        if (!isFaceUp(this)) {
             Image backsideImage = new Image(Card.class.getResource("/com/example/demo/cards/backside.png").toExternalForm());
-            card.getCardImage().setImage(backsideImage);
+            cardImage.setImage(backsideImage);
             return true; // La carte a été retournée avec succès
         }
         return false; // La carte était déjà retournée
     }
+
+
 
 
 

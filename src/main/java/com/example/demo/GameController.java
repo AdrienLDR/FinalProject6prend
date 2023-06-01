@@ -109,7 +109,7 @@ public class GameController {
             //TODO relier les règles
 
             // Retourner les cartes choisies
-            playerCard.setFaceUp(true);
+            playerCard.setFaceUp(playerCard) == true;
             botCard.setFaceUp(true);
 
             // Trouver la rangée appropriée pour chaque carte

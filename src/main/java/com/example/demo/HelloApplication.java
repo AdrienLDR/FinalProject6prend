@@ -8,13 +8,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class HelloApplication extends Application {
     private VBox player1Cards;
     private VBox player2Cards;
     private Row[] rows;
+    private List<StackPane> availableSlots; // Liste des emplacements disponibles
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -42,18 +44,13 @@ public class HelloApplication extends Application {
         root.setAlignment(Pos.CENTER);
         root.setSpacing(20);
         root.setPadding(new Insets(20));
-
         Label titleLabel = new Label("6 Qui Prend");
         titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-
         Button onePlayerButton = new Button("1 Joueur");
         onePlayerButton.setOnAction(e -> startGame(1));
-
         Button twoPlayersButton = new Button("2 Joueurs");
         twoPlayersButton.setOnAction(e -> startGame(2));
-
         root.getChildren().addAll(titleLabel, onePlayerButton, twoPlayersButton);
-
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -77,7 +74,6 @@ public class HelloApplication extends Application {
         deckCard.setAlignment(Pos.CENTER);
         addCardsToBottom(deckCard);
 
-
         // Box des cartes du deck des joueurs (cartes individuelles)
         deckIndivCard = new VBox();
         deckIndivCard.setPadding(new Insets(10, 10, 10, 10));
@@ -86,11 +82,39 @@ public class HelloApplication extends Application {
         mainPane.setBottom(deckCard);
         mainPane.setLeft(deckIndivCard);
 
+        // Créer les emplacements à gauche de l'écran
+        VBox leftSlots = createSlots();
+        deckIndivCard.getChildren().add(leftSlots);
+
         Scene scene = new Scene(mainPane, 800, 600);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private VBox createSlots() {
+        VBox leftSlots = new VBox();
+        leftSlots.setSpacing(10);
+        leftSlots.setAlignment(Pos.CENTER_LEFT);
+        leftSlots.setPadding(new Insets(10));
+
+        availableSlots = new ArrayList<>(); // Initialiser la liste des emplacements disponibles
+
+        for (int i = 0; i < 6; i++) {
+            StackPane slot = createSlot();
+            availableSlots.add(slot); // Ajouter l'emplacement à la liste des emplacements disponibles
+            leftSlots.getChildren().add(slot);
+        }
+
+        return leftSlots;
+    }
+
+    private StackPane createSlot() {
+        StackPane slot = new StackPane();
+        slot.setPrefSize(68, 85);
+        slot.getStyleClass().add("slot");
+        return slot;
     }
 
     private void addCardsToBottom(HBox deckCard) {
@@ -103,13 +127,10 @@ public class HelloApplication extends Application {
         }
     }
 
-
     private Card generateCard() {
         List<Card> cards = Card.generateCards();
         return cards.remove(0);
     }
-
-
 
     private void createRows() {
         rows = new Row[24];
@@ -134,15 +155,14 @@ public class HelloApplication extends Application {
     private void addCardsToPlayers(GridPane gridPane, int numPlayers) {
         Player player1 = new Player();
         Player player2 = new Player();
-
         List<Player> players = List.of(player1, player2);
         Card.distributeCards(players);
-
         player1Cards = createPlayerCards(player1);
         HBox player1Container = new HBox(player1Cards);
         player1Container.setAlignment(Pos.CENTER_LEFT);
         gridPane.add(player1Container, 0, 2, 1, 4);
 
+        player2Cards = new VBox(); // Initialiser player2Cards avec une VBox vide
         if (numPlayers == 2) {
             player2Cards = createPlayerCards(player2);
             HBox player2Container = new HBox(player2Cards);
@@ -151,21 +171,16 @@ public class HelloApplication extends Application {
         }
     }
 
-
     private VBox createPlayerCards(Player player) {
         VBox playerCards = new VBox();
         playerCards.setSpacing(10);
-
         List<Card> cards = player.getCards();
         for (Card card : cards) {
             StackPane cardPane = createCardRectangle(card);
-
             HBox cardBox = new HBox(cardPane);
             cardBox.setAlignment(Pos.CENTER);
-
             playerCards.getChildren().add(cardBox);
         }
-
         return playerCards;
     }
 
@@ -174,7 +189,6 @@ public class HelloApplication extends Application {
         cardImageView.setFitWidth(68);
         cardImageView.setFitHeight(85);
         cardImageView.getStyleClass().add("card-image");
-
         StackPane cardPane = new StackPane(cardImageView);
         cardPane.setAlignment(Pos.CENTER);
 
@@ -186,19 +200,26 @@ public class HelloApplication extends Application {
             cardPane.setEffect(null);
         });
 
-        cardPane.setOnMousePressed(event -> {
-            cardPane.setMouseTransparent(true);
-            cardPane.toFront();
-            cardPane.setTranslateX(event.getSceneX() - cardPane.getBoundsInParent().getWidth() / 2);
-            cardPane.setTranslateY(event.getSceneY() - cardPane.getBoundsInParent().getHeight() / 2);
+        cardImageView.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                moveCardToSlot(cardPane); // Appeler la fonction pour déplacer la carte vers un emplacement disponible
+            }
         });
-
-        cardPane.setOnMouseReleased(event -> {
-            cardPane.setMouseTransparent(false);
-        });
-
-        cardPane.setOnDragDone(DragEvent::consume);
 
         return cardPane;
+    }
+
+    private void moveCardToSlot(StackPane cardPane) {
+        if (!availableSlots.isEmpty()) {
+            StackPane slot = availableSlots.get(0); // Obtenir le premier emplacement disponible de la liste
+            availableSlots.remove(0); // Supprimer cet emplacement de la liste des emplacements disponibles
+
+            // Déplacer la carte vers l'emplacement disponible
+            slot.getChildren().add(cardPane);
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

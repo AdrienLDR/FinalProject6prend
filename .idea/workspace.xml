@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="On enlève la merde on a bien setup les cartes&#10;&#10;Une erreur mais pas grave rapide à fixer je pense">
+    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="Classement des joueurs&#10;&#10;Classement en fonction des pénalités">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_05_2023_14_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_05_2023_14_20__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,11 +67,11 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Lancer" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-20" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.example.demo.HelloApplication" />
-      <module name="FinalProject6prend" />
+      <module name="demo" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -178,14 +177,7 @@
       <option name="project" value="LOCAL" />
       <updated>1685372054757</updated>
     </task>
-    <task id="LOCAL-00014" summary="On enlève la merde on a bien setup les cartes&#10;&#10;Une erreur mais pas grave rapide à fixer je pense">
-      <created>1685548678610</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1685548678610</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,7 +197,6 @@
     <MESSAGE value="On passe sur sceneBuilder&#10;&#10;V2" />
     <MESSAGE value="Ajoute des pénalités&#10;&#10;Ajoute des pénalités et attribution automatique de la valeur des pénalités aux cartes correspondantes" />
     <MESSAGE value="Classement des joueurs&#10;&#10;Classement en fonction des pénalités" />
-    <MESSAGE value="On enlève la merde on a bien setup les cartes&#10;&#10;Une erreur mais pas grave rapide à fixer je pense" />
-    <option name="LAST_COMMIT_MESSAGE" value="On enlève la merde on a bien setup les cartes&#10;&#10;Une erreur mais pas grave rapide à fixer je pense" />
+    <option name="LAST_COMMIT_MESSAGE" value="Classement des joueurs&#10;&#10;Classement en fonction des pénalités" />
   </component>
 </project>

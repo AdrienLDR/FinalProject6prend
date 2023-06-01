@@ -2,20 +2,19 @@ package com.example.demo;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Card {
+class Card {
     private int number;
-    private int penalty;
+    private int penality;
     private ImageView cardImage;
     private int column;
 
     public Card(int number, ImageView cardImage) {
         this.number = number;
-        this.penalty = calculatePenalty(number);
+        this.penality = calculatePenalty(number);
         this.cardImage = cardImage;
     }
 
@@ -23,33 +22,20 @@ public class Card {
         return number;
     }
 
-    public int getPenalty() {
-        return penalty;
+    public int getPenality() {
+        return penality;
     }
 
     public int getColumn() {
         return column;
     }
 
-    public int getPoints() {
-        return penalty;
+    public int getPoints(){
+        return penality;
     }
 
     public ImageView getCardImage() {
         return cardImage;
-    }
-
-    public boolean isFaceUp() {
-        return cardImage.getImage() != null;
-    }
-
-    public boolean setFaceUp() {
-        if (!isFaceUp()) {
-            Image backsideImage = new Image(Card.class.getResource("/com/example/demo/cards/backside.png").toExternalForm());
-            cardImage.setImage(backsideImage);
-            return true; // La carte a été retournée avec succès
-        }
-        return false; // La carte était déjà retournée
     }
 
     public static List<Card> generateCards() {
@@ -63,6 +49,23 @@ public class Card {
         }
         return cards;
     }
+
+    public boolean isFaceUp(Card card) {
+        return card.isFaceUp(card);
+    }
+
+
+
+    public boolean setFaceUp(Card card) {
+        if (!card.isFaceUp(card)) {
+            Image backsideImage = new Image(Card.class.getResource("/com/example/demo/cards/backside.png").toExternalForm());
+            card.getCardImage().setImage(backsideImage);
+            return true; // La carte a été retournée avec succès
+        }
+        return false; // La carte était déjà retournée
+    }
+
+
 
     public static void distributeCards(List<Player> players) {
         List<Card> deck = generateCards();

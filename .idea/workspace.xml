@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="Les deux images sont mises">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/MenuBackground.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Bot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/GameViewController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/MenuBackground.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/logo.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +72,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-20" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.example.demo.HelloApplication" />
-      <module name="FinalProject6prend" />
+      <module name="demo" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

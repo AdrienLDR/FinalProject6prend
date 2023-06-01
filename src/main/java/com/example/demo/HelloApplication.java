@@ -51,10 +51,13 @@ public class HelloApplication extends Application {
         StackPane root = new StackPane();
 
         // Chargement de l'image de fond
-        ImageView backgroundImage = new ImageView(new Image("C:\\Users\\tourn\\OneDrive - ISEP\\Documents\\GitHub\\FinalProject6prend\\src\\main\\resources\\com\\example\\demo\\MenuBackground.png")); // Remplacez "fond.jpg" par le chemin vers votre image de fond
-        backgroundImage.setFitWidth(800);
-        backgroundImage.setFitHeight(600);
-        backgroundImage.setPreserveRatio(true);
+        Image backgroundImage = new Image(getClass().getResourceAsStream("/com/example/demo/MenuBackground.png"));
+
+        // Création d'un ImageView pour afficher l'image de fond
+        ImageView backgroundImageView = new ImageView(backgroundImage);
+        backgroundImageView.setFitWidth(800);
+        backgroundImageView.setFitHeight(600);
+        backgroundImageView.setPreserveRatio(true);
 
         // Contenu de l'interface utilisateur
         VBox contentBox = new VBox();
@@ -62,10 +65,8 @@ public class HelloApplication extends Application {
         contentBox.setSpacing(20);
         contentBox.setPadding(new Insets(20));
 
-
         Label titleLabel = new Label("Bienvenue !");
         titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-
 
         Button onePlayerButton = new Button("1 Joueur");
         onePlayerButton.setOnAction(e -> startGame(1));
@@ -76,12 +77,13 @@ public class HelloApplication extends Application {
         contentBox.getChildren().addAll(titleLabel, onePlayerButton, twoPlayersButton);
 
         // Ajout des éléments au conteneur principal
-        root.getChildren().addAll(backgroundImage, contentBox);
+        root.getChildren().addAll(backgroundImageView, contentBox);
 
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
 
     private void startGame(int numPlayers) {
@@ -113,9 +115,13 @@ public class HelloApplication extends Application {
         deckIndivCard.getChildren().add(leftSlots);
 
         // Création de l'image "image.png"
-        ImageView image = new ImageView(new Image("C:\\Users\\tourn\\OneDrive - ISEP\\Documents\\GitHub\\FinalProject6prend\\src\\main\\resources\\com\\example\\demo\\logo2.png"));
-        HBox imageBox = new HBox(image);
+        ImageView imageView = new ImageView();
+        Image image = new Image(getClass().getResourceAsStream("/com/example/demo/logo2.png"));
+        imageView.setImage(image);
+
+        HBox imageBox = new HBox(imageView);
         imageBox.setAlignment(Pos.CENTER);
+
 
         VBox centerSlots = createCenterSlots();
         VBox centerBox = new VBox(imageBox, centerSlots); // Ajout de l'image et de la VBox centerSlots dans un conteneur VBox

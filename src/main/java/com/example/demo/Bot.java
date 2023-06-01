@@ -46,4 +46,3 @@ public class Bot {
         return bestCard;
     }
 }
-

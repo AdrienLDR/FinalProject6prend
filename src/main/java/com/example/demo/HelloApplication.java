@@ -31,6 +31,9 @@ public class HelloApplication extends Application {
     private Row[] rows;
     private List<StackPane> availableSlots; // Liste des emplacements disponibles
 
+    private List<Card> deck;
+
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
@@ -65,7 +68,7 @@ public class HelloApplication extends Application {
         // Box des cartes des joueurs qui sont sur le Board
         cardGridPane = new GridPane();
         cardGridPane.setAlignment(Pos.CENTER);
-        addCardsToPlayers(cardGridPane, numPlayers);
+        distributeCardsToPlayers(numPlayers);
 
         // Box des cartes du deck des joueurs (deck entier)
         deckCard = new HBox();
@@ -83,8 +86,12 @@ public class HelloApplication extends Application {
         mainPane.setLeft(deckIndivCard);
 
         // Créer les emplacements à gauche de l'écran
-        VBox leftSlots = createSlots();
+        VBox leftSlots = createLeftSlots();
         deckIndivCard.getChildren().add(leftSlots);
+
+        // Créer les emplacements au milieu de la fenêtre
+        VBox centerSlots = createCenterSlots();
+        mainPane.setCenter(centerSlots);
 
         Scene scene = new Scene(mainPane, 800, 600);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
@@ -93,15 +100,15 @@ public class HelloApplication extends Application {
         primaryStage.show();
     }
 
-    private VBox createSlots() {
+    private VBox createLeftSlots() {
         VBox leftSlots = new VBox();
         leftSlots.setSpacing(10);
         leftSlots.setAlignment(Pos.CENTER_LEFT);
         leftSlots.setPadding(new Insets(10));
 
-        availableSlots = new ArrayList<>(); // Initialiser la liste des emplacements disponibles
+        availableSlots = new ArrayList<>(); // Réinitialiser la liste des emplacements disponibles
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 2; i++) {
             StackPane slot = createSlot();
             availableSlots.add(slot); // Ajouter l'emplacement à la liste des emplacements disponibles
             leftSlots.getChildren().add(slot);
@@ -109,6 +116,39 @@ public class HelloApplication extends Application {
 
         return leftSlots;
     }
+
+    private VBox createCenterSlots() {
+        VBox centerSlots = new VBox();
+        centerSlots.setSpacing(10);
+        centerSlots.setAlignment(Pos.CENTER);
+        centerSlots.setPadding(new Insets(10));
+
+        List<Card> deck = Card.generateCards(); // Générer le jeu de cartes
+        Collections.shuffle(deck); // Mélanger le jeu de cartes
+
+        for (int i = 0; i < 4; i++) {
+            HBox row = new HBox();
+            row.setAlignment(Pos.CENTER);
+
+            // Générer une carte aléatoire pour le début de la ligne
+            Card randomCard = deck.remove(0);
+            StackPane slot = createSlot();
+            StackPane cardPane = createCardRectangle(randomCard);
+            slot.getChildren().add(cardPane);
+            row.getChildren().add(slot);
+
+            for (int j = 1; j < 6; j++) {
+                // Créer un emplacement vide pour les autres colonnes
+                StackPane emptySlot = createSlot();
+                row.getChildren().add(emptySlot);
+            }
+
+            centerSlots.getChildren().add(row);
+        }
+
+        return centerSlots;
+    }
+
 
     private StackPane createSlot() {
         StackPane slot = new StackPane();
@@ -152,7 +192,7 @@ public class HelloApplication extends Application {
         return label;
     }
 
-    private void addCardsToPlayers(GridPane gridPane, int numPlayers) {
+    private void distributeCardsToPlayers(int numPlayers) {
         Player player1 = new Player();
         Player player2 = new Player();
         List<Player> players = List.of(player1, player2);
@@ -160,14 +200,14 @@ public class HelloApplication extends Application {
         player1Cards = createPlayerCards(player1);
         HBox player1Container = new HBox(player1Cards);
         player1Container.setAlignment(Pos.CENTER_LEFT);
-        gridPane.add(player1Container, 0, 2, 1, 4);
+        cardGridPane.add(player1Container, 0, 2, 1, 4);
 
         player2Cards = new VBox(); // Initialiser player2Cards avec une VBox vide
         if (numPlayers == 2) {
             player2Cards = createPlayerCards(player2);
             HBox player2Container = new HBox(player2Cards);
             player2Container.setAlignment(Pos.CENTER_RIGHT);
-            gridPane.add(player2Container, 2, 2, 1, 4);
+            cardGridPane.add(player2Container, 2, 2, 1, 4);
         }
     }
 

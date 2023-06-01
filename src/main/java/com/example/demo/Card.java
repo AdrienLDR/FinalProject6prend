@@ -2,11 +2,11 @@ package com.example.demo;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Card {
+class Card {
     private int number;
     private int penalty;
     private ImageView cardImage;
@@ -30,12 +30,12 @@ public class Card {
         return column;
     }
 
-    public int getPoints() {
+    public int getPoints(){
         return penalty;
     }
 
-    public Image getImage() {
-        return cardImage.getImage();
+    public ImageView getCardImage() {
+        return cardImage;
     }
 
     public static List<Card> generateCards() {
@@ -50,6 +50,39 @@ public class Card {
         return cards;
     }
 
+    public boolean isFaceUp(Card card) {
+        return card.isFaceUp(card);
+    }
+
+
+
+    public boolean setFaceUp() {
+        if (!isFaceUp(this)) {
+            Image backsideImage = new Image(Card.class.getResource("/com/example/demo/cards/backside.png").toExternalForm());
+            cardImage.setImage(backsideImage);
+            return true; // La carte a été retournée avec succès
+        }
+        return false; // La carte était déjà retournée
+    }
+
+
+
+
+
+    public static void distributeCards(List<Player> players) {
+        List<Card> deck = generateCards();
+        Collections.shuffle(deck);
+
+        int index = 0;
+        for (Player player : players) {
+            for (int number = 0; number < 10; number++) {
+                player.getCards().add(deck.get(index));
+                index++;
+            }
+        }
+    }
+
+    // Calculate card penalties
     public static int calculatePenalty(int number) {
         if (number == 55) {
             return 7;
@@ -62,13 +95,5 @@ public class Card {
         } else {
             return 1;
         }
-    }
-
-    public int getValue() {
-        return number;
-    }
-
-    public ImageView getCardImage() {
-        return cardImage;
     }
 }

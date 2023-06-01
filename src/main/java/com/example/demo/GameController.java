@@ -2,7 +2,6 @@ package com.example.demo;
 
 import javafx.scene.control.Label;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class GameController {
     private List<Player> players;
     private Bot bot;
     private int currentPlayerIndex;
-    private List<Label> scoreLabels;
+    private List<Label> scoreLabels; // Liste de Labels pour afficher les scores des joueurs
 
     public GameController(List<Row> rows, List<Player> players) {
         this.rows = rows;
@@ -51,17 +50,8 @@ public class GameController {
     }
 
     public void distributeCards() {
-        List<Card> deck = Card.generateCards();
-        Collections.shuffle(deck);
-
-        for (Player player : players) {
-            for (int i = 0; i < 10; i++) {
-                Card card = deck.remove(0);
-                player.addCard(card);
-            }
-        }
+        Card.distributeCards(players);
     }
-
 
     public Row getMinDifferenceRow(Card card) {
         int minDifference = Integer.MAX_VALUE;
@@ -97,8 +87,6 @@ public class GameController {
         player.addToTas(chosenRow.getCards()); // Ajoute les cartes à son tas
         chosenRow.clearCards(); // Efface les cartes de la série
         chosenRow.addCard(card); // Ajoute la nouvelle carte à la série
-
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
 
     public void calculateTotalPenalties() {
@@ -127,7 +115,7 @@ public class GameController {
                 lowestScore = score;
             }
         }
-        // TODO: Afficher dans l'interface le gagnant
+        //TODO afficher dans l'interface le gagnant
     }
 
     public boolean isGameFinished() {
@@ -150,8 +138,8 @@ public class GameController {
         if (currentPlayer.getCards().size() == 1) {
             Card botCard = bot.findBestCard(rows);
 
-            // playerCard.setFaceUp();
-            // botCard.setFaceUp();
+            playerCard.setFaceUp();
+            botCard.setFaceUp();
 
             Row playerRow = getMinDifferenceRow(playerCard);
             Row botRow = getMinDifferenceRow(botCard);
@@ -177,4 +165,5 @@ public class GameController {
             }
         }
     }
+
 }

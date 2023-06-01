@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,6 +28,7 @@ public class HelloApplication extends Application {
     private GridPane cardGridPane;
     private HBox deckCard;
     private VBox deckIndivCard;
+    private VBox pointBox;
     private VBox player1Cards;
     private VBox player2Cards;
     private Row[] rows;
@@ -49,13 +52,20 @@ public class HelloApplication extends Application {
         root.setAlignment(Pos.CENTER);
         root.setSpacing(20);
         root.setPadding(new Insets(20));
+
+        ImageView imageView = new ImageView(new Image("C:\\Users\\tourn\\OneDrive - ISEP\\Documents\\GitHub\\FinalProject6prend\\src\\main\\resources\\com\\example\\demo\\logo.png")); // Ajouter le chemin vers l'image
         Label titleLabel = new Label("6 Qui Prend");
         titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+
+        HBox imageBox = new HBox(imageView);
+        imageBox.setAlignment(Pos.CENTER);
+
         Button onePlayerButton = new Button("1 Joueur");
         onePlayerButton.setOnAction(e -> startGame(1));
         Button twoPlayersButton = new Button("2 Joueurs");
         twoPlayersButton.setOnAction(e -> startGame(2));
-        root.getChildren().addAll(titleLabel, onePlayerButton, twoPlayersButton);
+
+        root.getChildren().addAll(imageBox, titleLabel, onePlayerButton, twoPlayersButton);
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -83,7 +93,7 @@ public class HelloApplication extends Application {
         deckIndivCard = new VBox();
         deckIndivCard.setPadding(new Insets(10, 10, 10, 10));
         deckIndivCard.setSpacing(10);
-        
+
         pointBox = new VBox();
         pointBox.setPadding(new Insets(10, 10, 10, 10));
         pointBox.setSpacing(10);
@@ -108,7 +118,7 @@ public class HelloApplication extends Application {
 
         Scene scene = new Scene(mainPane, 800, 600);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
-        
+
         mainPane.setRight(pointBox);
 
         primaryStage.setScene(scene);

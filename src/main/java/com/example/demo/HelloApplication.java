@@ -73,57 +73,50 @@ public class HelloApplication extends Application {
 
     private void startGame(int numPlayers) {
         createRows();
-        // Plan avec l'ensemble des éléments du jeu
         mainPane = new BorderPane();
         addPlayerLabels(mainPane);
-
-        // Box des cartes des joueurs qui sont sur le Board
         cardGridPane = new GridPane();
         cardGridPane.setAlignment(Pos.CENTER);
         distributeCardsToPlayers(numPlayers);
-
-        // Box des cartes du deck des joueurs (deck entier)
         deckCard = new HBox();
         deckCard.setPadding(new Insets(10, 10, 10, 10));
         deckCard.setSpacing(10);
         deckCard.setAlignment(Pos.CENTER);
         addCardsToBottom(deckCard);
-
-        // Box des cartes du deck des joueurs (cartes individuelles)
         deckIndivCard = new VBox();
         deckIndivCard.setPadding(new Insets(10, 10, 10, 10));
         deckIndivCard.setSpacing(10);
-
         pointBox = new VBox();
         pointBox.setPadding(new Insets(10, 10, 10, 10));
         pointBox.setSpacing(10);
         pointBox.setAlignment(Pos.CENTER_LEFT);
-
         Label pointLabel = new Label("Pénalités :");
         pointLabel.setFont(Font.font(25));
         pointLabel.setTextAlignment(TextAlignment.CENTER);
-
         pointBox.getChildren().addAll(pointLabel);
-
         mainPane.setBottom(deckCard);
         mainPane.setLeft(deckIndivCard);
-
-        // Créer les emplacements à gauche de l'écran
         VBox leftSlots = createLeftSlots();
         deckIndivCard.getChildren().add(leftSlots);
 
-        // Créer les emplacements au milieu de la fenêtre
+        // Création de l'image "image.png"
+        ImageView image = new ImageView(new Image("C:\\Users\\tourn\\OneDrive - ISEP\\Documents\\GitHub\\FinalProject6prend\\src\\main\\resources\\com\\example\\demo\\logo2.png"));
+        HBox imageBox = new HBox(image);
+        imageBox.setAlignment(Pos.CENTER);
+
         VBox centerSlots = createCenterSlots();
-        mainPane.setCenter(centerSlots);
+        VBox centerBox = new VBox(imageBox, centerSlots); // Ajout de l'image et de la VBox centerSlots dans un conteneur VBox
+        centerBox.setAlignment(Pos.CENTER);
+        mainPane.setCenter(centerBox);
 
         Scene scene = new Scene(mainPane, 800, 600);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
-
         mainPane.setRight(pointBox);
 
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
     private VBox createLeftSlots() {
         VBox leftSlots = new VBox();

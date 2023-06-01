@@ -2,6 +2,7 @@ package com.example.demo;
 
 import javafx.scene.control.Label;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -11,6 +12,7 @@ public class GameController {
 
     private List<Row> rows;
     private List<Player> players;
+    private Bot bot;
     private int currentPlayerIndex;
     private List<Label> scoreLabels; // Liste de Labels pour afficher les scores des joueurs
 
@@ -93,6 +95,58 @@ public class GameController {
         }
     }
 
+
+    // Méthode pour jouer une carte (joueur et bot)
+    public void playCard(Card playerCard) {
+        Player currentPlayer = getCurrentPlayer();
+
+        if (currentPlayer.getCards().size() == 1) {
+            // Les deux joueurs ont choisi leur carte
+            Card botCard = bot.findBestCard(rows);
+
+            //TODO récupérer les cartes onclick
+            //TODO Vérifier quelles cartes est la plus petite entre les deux et la placer la première
+            //TODO relier les règles
+
+            // Retourner les cartes choisies
+            playerCard.setFaceUp(playerCard) == true;
+            botCard.setFaceUp(true);
+
+            // Trouver la rangée appropriée pour chaque carte
+            Row playerRow = getMinDifferenceRow(playerCard);
+            Row botRow = getMinDifferenceRow(botCard);
+
+            // Gérer les séries complétées pour chaque joueur
+            handleCompletedSeries(playerRow, playerCard);
+            handleCompletedSeries(botRow, botCard);
+
+            // Gérer la carte la plus basse pour chaque joueur
+            if (playerCard.getNumber() < botCard.getNumber()) {
+                handleLowestCard(currentPlayer, playerCard);
+            } else {
+                handleLowestCard(currentPlayer, botCard);
+            }
+
+            // Calculer les points et les pénalités
+            calculatePoints();
+            calculateTotalPenalities();
+
+            // Mettre à jour les labels des scores
+            updateScoreLabels();
+
+            // Vérifier si le jeu est terminé
+            if (isGameFinished()) {
+                endGame();
+            } else {
+                // Passer au prochain tour
+                nextTurn();
+            }
+        } else {
+            // Attendre que l'autre joueur choisisse sa carte
+        }
+    }
+
+
     public void handleLowestCard(Player player, Card card) {
         Row chosenRow = player.chooseRowToRemove(rows); // Méthode pour que le joueur choisisse une série à ramasser
         player.addToTas(chosenRow.getCards()); // Ajoute les cartes à son tas
@@ -102,19 +156,42 @@ public class GameController {
 
     public void calculateTotalPenalities() {
         for (Player player : players) {
-            int totalPenalties = 0;
+            int totalPenalities = 0;
 
             for (Card card : player.getCards()) {
                 int penalties = card.getPenality();
-                totalPenalties += penalties;
+                totalPenalities += penalties;
             }
 
-            player.setTotalPenalities(totalPenalties);
+            player.setTotalPenalities(totalPenalities);
         }
 
         Collections.sort(players, Comparator.comparingInt(Player::getTotalPenalities)); //Classement des joueurs par ordre croissant de pénalités
     }
 
+    public void endGame() {
+        // Afficher le joueur gagnant avec le score le plus bas
+        Player winner = players.get(0);
+        int lowestScore = winner.getTotalPoints();
+        for (Player player : players) {
+            int score = player.getTotalPoints();
+            if (score < lowestScore) {
+                winner = player;
+                lowestScore = score;
+            }
+        }
+    }
+
+    public boolean isGameFinished() {
+        // Vérifier si les joueurs n'ont plus de cartes dans leurs mains
+        for (Player player : players) {
+            if (!player.getCards().isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 
 }

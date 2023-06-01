@@ -83,8 +83,12 @@ public class HelloApplication extends Application {
         mainPane.setLeft(deckIndivCard);
 
         // Créer les emplacements à gauche de l'écran
-        VBox leftSlots = createSlots();
+        VBox leftSlots = createLeftSlots();
         deckIndivCard.getChildren().add(leftSlots);
+
+        // Créer les emplacements au milieu de la fenêtre
+        VBox centerSlots = createCenterSlots();
+        mainPane.setCenter(centerSlots);
 
         Scene scene = new Scene(mainPane, 800, 600);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
@@ -93,15 +97,15 @@ public class HelloApplication extends Application {
         primaryStage.show();
     }
 
-    private VBox createSlots() {
+    private VBox createLeftSlots() {
         VBox leftSlots = new VBox();
         leftSlots.setSpacing(10);
         leftSlots.setAlignment(Pos.CENTER_LEFT);
         leftSlots.setPadding(new Insets(10));
 
-        availableSlots = new ArrayList<>(); // Initialiser la liste des emplacements disponibles
+        availableSlots = new ArrayList<>(); // Réinitialiser la liste des emplacements disponibles
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 2; i++) {
             StackPane slot = createSlot();
             availableSlots.add(slot); // Ajouter l'emplacement à la liste des emplacements disponibles
             leftSlots.getChildren().add(slot);
@@ -109,6 +113,39 @@ public class HelloApplication extends Application {
 
         return leftSlots;
     }
+
+    private VBox createCenterSlots() {
+        VBox centerSlots = new VBox();
+        centerSlots.setSpacing(10);
+        centerSlots.setAlignment(Pos.CENTER);
+        centerSlots.setPadding(new Insets(10));
+
+        List<Card> deck = Card.generateCards(); // Générer le jeu de cartes
+        Collections.shuffle(deck); // Mélanger le jeu de cartes
+
+        for (int i = 0; i < 4; i++) {
+            HBox row = new HBox();
+            row.setAlignment(Pos.CENTER);
+
+            // Générer une carte aléatoire pour le début de la ligne
+            Card randomCard = deck.remove(0);
+            StackPane slot = createSlot();
+            StackPane cardPane = createCardRectangle(randomCard);
+            slot.getChildren().add(cardPane);
+            row.getChildren().add(slot);
+
+            for (int j = 1; j < 6; j++) {
+                // Créer un emplacement vide pour les autres colonnes
+                StackPane emptySlot = createSlot();
+                row.getChildren().add(emptySlot);
+            }
+
+            centerSlots.getChildren().add(row);
+        }
+
+        return centerSlots;
+    }
+
 
     private StackPane createSlot() {
         StackPane slot = new StackPane();

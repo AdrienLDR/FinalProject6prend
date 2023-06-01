@@ -50,6 +50,21 @@ class Card {
         return cards;
     }
 
+    public boolean isFaceUp(Card card) {
+        return card.isFaceUp(card);
+    }
+
+
+
+    public boolean setFaceUp(Card card) {
+        if (!card.isFaceUp(card)) {
+            Image backsideImage = new Image(Card.class.getResource("/com/example/demo/cards/backside.png").toExternalForm());
+            card.getCardImage().setImage(backsideImage);
+            return true; // La carte a été retournée avec succès
+        }
+        return false; // La carte était déjà retournée
+    }
+
 
 
     public static void distributeCards(List<Player> players) {

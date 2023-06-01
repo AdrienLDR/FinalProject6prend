@@ -28,6 +28,7 @@ public class HelloApplication extends Application {
     private VBox player1Cards;
     private VBox player2Cards;
     private Row[] rows;
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
@@ -41,13 +42,18 @@ public class HelloApplication extends Application {
         root.setAlignment(Pos.CENTER);
         root.setSpacing(20);
         root.setPadding(new Insets(20));
+
         Label titleLabel = new Label("6 Qui Prend");
         titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+
         Button onePlayerButton = new Button("1 Joueur");
         onePlayerButton.setOnAction(e -> startGame(1));
+
         Button twoPlayersButton = new Button("2 Joueurs");
         twoPlayersButton.setOnAction(e -> startGame(2));
+
         root.getChildren().addAll(titleLabel, onePlayerButton, twoPlayersButton);
+
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -124,15 +130,19 @@ public class HelloApplication extends Application {
         label.getStyleClass().add("player-label");
         return label;
     }
+
     private void addCardsToPlayers(GridPane gridPane, int numPlayers) {
         Player player1 = new Player();
         Player player2 = new Player();
+
         List<Player> players = List.of(player1, player2);
         Card.distributeCards(players);
+
         player1Cards = createPlayerCards(player1);
         HBox player1Container = new HBox(player1Cards);
         player1Container.setAlignment(Pos.CENTER_LEFT);
         gridPane.add(player1Container, 0, 2, 1, 4);
+
         if (numPlayers == 2) {
             player2Cards = createPlayerCards(player2);
             HBox player2Container = new HBox(player2Cards);
@@ -140,16 +150,22 @@ public class HelloApplication extends Application {
             gridPane.add(player2Container, 2, 2, 1, 4);
         }
     }
+
+
     private VBox createPlayerCards(Player player) {
         VBox playerCards = new VBox();
         playerCards.setSpacing(10);
+
         List<Card> cards = player.getCards();
         for (Card card : cards) {
             StackPane cardPane = createCardRectangle(card);
+
             HBox cardBox = new HBox(cardPane);
             cardBox.setAlignment(Pos.CENTER);
+
             playerCards.getChildren().add(cardBox);
         }
+
         return playerCards;
     }
 
@@ -158,6 +174,7 @@ public class HelloApplication extends Application {
         cardImageView.setFitWidth(68);
         cardImageView.setFitHeight(85);
         cardImageView.getStyleClass().add("card-image");
+
         StackPane cardPane = new StackPane(cardImageView);
         cardPane.setAlignment(Pos.CENTER);
 

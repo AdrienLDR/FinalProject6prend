@@ -1,5 +1,5 @@
 .card-image {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0, 0, 0, 5);
 }
 
 .card-image-hover {
@@ -22,13 +22,33 @@
     -fx-arc-width: 10;
     -fx-arc-height: 10;
 }
+
 .card-drag-over {
     -fx-border-color: red;
     -fx-border-width: 2;
 }
 
 .body {
-    -fx-background-image: url("../resources/com/example/demo/MenuBackground.jpg");
+    -fx-background-image: url("com/example/demo/MenuBackground.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
+}
+
+.slot {
+    -fx-background-color: lightgray;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 12px;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 0);
+}
+
+.slot:hover {
+    -fx-background-color: lightblue;
+}
+
+.slot.card-drag-over {
+    -fx-border-color: red;
+    -fx-border-width: 2;
 }

@@ -31,6 +31,9 @@ public class HelloApplication extends Application {
     private Row[] rows;
     private List<StackPane> availableSlots; // Liste des emplacements disponibles
 
+    private List<Card> deck;
+
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
@@ -65,7 +68,7 @@ public class HelloApplication extends Application {
         // Box des cartes des joueurs qui sont sur le Board
         cardGridPane = new GridPane();
         cardGridPane.setAlignment(Pos.CENTER);
-        addCardsToPlayers(cardGridPane, numPlayers);
+        distributeCardsToPlayers(numPlayers);
 
         // Box des cartes du deck des joueurs (deck entier)
         deckCard = new HBox();
@@ -189,7 +192,7 @@ public class HelloApplication extends Application {
         return label;
     }
 
-    private void addCardsToPlayers(GridPane gridPane, int numPlayers) {
+    private void distributeCardsToPlayers(int numPlayers) {
         Player player1 = new Player();
         Player player2 = new Player();
         List<Player> players = List.of(player1, player2);
@@ -197,14 +200,14 @@ public class HelloApplication extends Application {
         player1Cards = createPlayerCards(player1);
         HBox player1Container = new HBox(player1Cards);
         player1Container.setAlignment(Pos.CENTER_LEFT);
-        gridPane.add(player1Container, 0, 2, 1, 4);
+        cardGridPane.add(player1Container, 0, 2, 1, 4);
 
         player2Cards = new VBox(); // Initialiser player2Cards avec une VBox vide
         if (numPlayers == 2) {
             player2Cards = createPlayerCards(player2);
             HBox player2Container = new HBox(player2Cards);
             player2Container.setAlignment(Pos.CENTER_RIGHT);
-            gridPane.add(player2Container, 2, 2, 1, 4);
+            cardGridPane.add(player2Container, 2, 2, 1, 4);
         }
     }
 

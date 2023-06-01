@@ -12,7 +12,7 @@ public class Bot {
         this.score = 0;
     }
 
-    private Card findBestCard(List<Row> rows) {
+    public Card findBestCard(List<Row> rows) {
         Card bestCard = null;
         int minPoints = Integer.MAX_VALUE;
 

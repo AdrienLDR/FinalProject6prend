@@ -36,8 +36,8 @@ public class Player {
     public int getTotalPenalities() {
         return totalPenalities;
     }
-    public void setTotalPenalities(int totalPenalties) {
-        this.totalPenalities = totalPenalties;
+    public void setTotalPenalities(int totalPenalities) {
+        this.totalPenalities = totalPenalities;
     }
 
 

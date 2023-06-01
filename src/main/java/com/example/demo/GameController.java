@@ -94,7 +94,7 @@ public class GameController {
             int totalPenalities = 0;
 
             for (Card card : player.getCards()) {
-                int penalties = card.getPenalty();
+                int penalties = card.getPenality();
                 totalPenalities += penalties;
             }
 
@@ -138,8 +138,8 @@ public class GameController {
         if (currentPlayer.getCards().size() == 1) {
             Card botCard = bot.findBestCard(rows);
 
-            playerCard.setFaceUp();
-            botCard.setFaceUp();
+            //playerCard.setFaceUp();
+            //botCard.setFaceUp();
 
             Row playerRow = getMinDifferenceRow(playerCard);
             Row botRow = getMinDifferenceRow(botCard);

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class Card {
+public class Card {
     private int number;
     private int penality;
     private ImageView cardImage;
@@ -30,7 +30,11 @@ class Card {
         return column;
     }
 
-    public int getPoints(){
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    public int getPoints() {
         return penality;
     }
 
@@ -65,8 +69,6 @@ class Card {
         return false; // La carte était déjà retournée
     }
 
-
-
     public static void distributeCards(List<Player> players) {
         List<Card> deck = generateCards();
         Collections.shuffle(deck);
@@ -74,7 +76,9 @@ class Card {
         int index = 0;
         for (Player player : players) {
             for (int number = 0; number < 10; number++) {
-                player.getCards().add(deck.get(index));
+                Card card = deck.get(index);
+                card.setColumn(number); // Set the column number for the card
+                player.getCards().add(card);
                 index++;
             }
         }

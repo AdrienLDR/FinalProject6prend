@@ -12,6 +12,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +21,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class HelloApplication extends Application {
-
     private BorderPane mainPane;
     private Stage primaryStage;
     private GridPane cardGridPane;
@@ -28,14 +28,20 @@ public class HelloApplication extends Application {
     private VBox deckIndivCard;
     private VBox player1Cards;
     private VBox player2Cards;
+    private VBox pointBox;
     private Row[] rows;
-    private List<StackPane> availableSlots; // Liste des emplacements disponibles
+    private List<StackPane> availableSlots;
+
+    private List<Card> deck;
+    private List<Player> players;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("6 Qui Prend");
-
+        String jonhnny = "src/main/resources/com/example/demo/Music.wav";
+        com.example.demo.Music music = new com.example.demo.Music();
+        music.playMusic(jonhnny);
         createModeSelectionScene();
     }
 
@@ -57,57 +63,100 @@ public class HelloApplication extends Application {
     }
 
     private void startGame(int numPlayers) {
+
         createRows();
-        // Plan avec l'ensemble des éléments du jeu
         mainPane = new BorderPane();
         addPlayerLabels(mainPane);
 
-        // Box des cartes des joueurs qui sont sur le Board
         cardGridPane = new GridPane();
         cardGridPane.setAlignment(Pos.CENTER);
-        addCardsToPlayers(cardGridPane, numPlayers);
+        distributeCardsToPlayers(numPlayers);
 
-        // Box des cartes du deck des joueurs (deck entier)
         deckCard = new HBox();
         deckCard.setPadding(new Insets(10, 10, 10, 10));
         deckCard.setSpacing(10);
         deckCard.setAlignment(Pos.CENTER);
         addCardsToBottom(deckCard);
 
-        // Box des cartes du deck des joueurs (cartes individuelles)
         deckIndivCard = new VBox();
         deckIndivCard.setPadding(new Insets(10, 10, 10, 10));
         deckIndivCard.setSpacing(10);
 
+        pointBox = new VBox();
+        pointBox.setPadding(new Insets(10, 10, 10, 10));
+        pointBox.setSpacing(10);
+        pointBox.setAlignment(Pos.CENTER_LEFT);
+
+        Label pointLabel = new Label("Pénalités :");
+        pointLabel.setFont(Font.font(25));
+        pointLabel.setTextAlignment(TextAlignment.CENTER);
+
+        pointBox.getChildren().addAll(pointLabel);
+
+
         mainPane.setBottom(deckCard);
         mainPane.setLeft(deckIndivCard);
 
-        // Créer les emplacements à gauche de l'écran
-        VBox leftSlots = createSlots();
+        VBox leftSlots = createLeftSlots();
         deckIndivCard.getChildren().add(leftSlots);
+
+        VBox centerSlots = createCenterSlots();
+        mainPane.setCenter(centerSlots);
 
         Scene scene = new Scene(mainPane, 800, 600);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+
+        mainPane.setRight(pointBox);
 
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private VBox createSlots() {
+    private VBox createLeftSlots() {
         VBox leftSlots = new VBox();
         leftSlots.setSpacing(10);
         leftSlots.setAlignment(Pos.CENTER_LEFT);
         leftSlots.setPadding(new Insets(10));
 
-        availableSlots = new ArrayList<>(); // Initialiser la liste des emplacements disponibles
+        availableSlots = new ArrayList<>();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 2; i++) {
             StackPane slot = createSlot();
-            availableSlots.add(slot); // Ajouter l'emplacement à la liste des emplacements disponibles
+            availableSlots.add(slot);
             leftSlots.getChildren().add(slot);
         }
 
         return leftSlots;
+    }
+
+    private VBox createCenterSlots() {
+        VBox centerSlots = new VBox();
+        centerSlots.setSpacing(10);
+        centerSlots.setAlignment(Pos.CENTER);
+        centerSlots.setPadding(new Insets(10));
+
+        List<Card> deck = Card.generateCards();
+        Collections.shuffle(deck);
+
+        for (int i = 0; i < 4; i++) {
+            HBox row = new HBox();
+            row.setAlignment(Pos.CENTER);
+
+            Card randomCard = deck.remove(0);
+            StackPane slot = createSlot();
+            StackPane cardPane = createCardRectangle(randomCard);
+            slot.getChildren().add(cardPane);
+            row.getChildren().add(slot);
+
+            for (int j = 1; j < 6; j++) {
+                StackPane emptySlot = createSlot();
+                row.getChildren().add(emptySlot);
+            }
+
+            centerSlots.getChildren().add(row);
+        }
+
+        return centerSlots;
     }
 
     private StackPane createSlot() {
@@ -152,35 +201,42 @@ public class HelloApplication extends Application {
         return label;
     }
 
-    private void addCardsToPlayers(GridPane gridPane, int numPlayers) {
+    private void distributeCardsToPlayers(int numPlayers) {
         Player player1 = new Player();
         Player player2 = new Player();
         List<Player> players = List.of(player1, player2);
-        Card.distributeCards(players);
-        player1Cards = createPlayerCards(player1);
-        HBox player1Container = new HBox(player1Cards);
-        player1Container.setAlignment(Pos.CENTER_LEFT);
-        gridPane.add(player1Container, 0, 2, 1, 4);
 
-        player2Cards = new VBox(); // Initialiser player2Cards avec une VBox vide
+        for (Player player : players) {
+            for (int i = 0; i < 10; i++) {
+                Card card = generateCard();
+                player.addCard(card);
+            }
+        }
+
+        this.players = players;
+
+        player1Cards = createPlayerCards(player1);
+        mainPane.setLeft(player1Cards);
+
         if (numPlayers == 2) {
             player2Cards = createPlayerCards(player2);
-            HBox player2Container = new HBox(player2Cards);
-            player2Container.setAlignment(Pos.CENTER_RIGHT);
-            gridPane.add(player2Container, 2, 2, 1, 4);
+            mainPane.setRight(player2Cards);
         }
     }
 
     private VBox createPlayerCards(Player player) {
         VBox playerCards = new VBox();
+        playerCards.setAlignment(Pos.CENTER_LEFT);
         playerCards.setSpacing(10);
+        playerCards.setPadding(new Insets(10));
+
         List<Card> cards = player.getCards();
+
         for (Card card : cards) {
             StackPane cardPane = createCardRectangle(card);
-            HBox cardBox = new HBox(cardPane);
-            cardBox.setAlignment(Pos.CENTER);
-            playerCards.getChildren().add(cardBox);
+            playerCards.getChildren().add(cardPane);
         }
+
         return playerCards;
     }
 
@@ -209,6 +265,12 @@ public class HelloApplication extends Application {
         return cardPane;
     }
 
+    // Méthode de gestion des clics sur une carte
+    private void handleCardClick(Card card) {
+        int cardValue = card.getValue();
+        System.out.println("Carte cliquée : " + cardValue);
+    }
+
     private void moveCardToSlot(StackPane cardPane) {
         if (!availableSlots.isEmpty()) {
             StackPane slot = availableSlots.get(0); // Obtenir le premier emplacement disponible de la liste
@@ -218,6 +280,7 @@ public class HelloApplication extends Application {
             slot.getChildren().add(cardPane);
         }
     }
+
 
     public static void main(String[] args) {
         launch(args);

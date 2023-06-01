@@ -1,4 +1,3 @@
-
 package com.example.demo;
 
 import javafx.scene.control.ChoiceDialog;
@@ -11,12 +10,12 @@ public class Player {
     private List<Card> cards;
     private List<Card> tas;
     private int totalPoints;
-    private int totalPenalities;
+    private int totalPenalties;
 
     public Player() {
         this.cards = new ArrayList<>();
         this.tas = new ArrayList<>();
-        this.totalPenalities = 0;
+        this.totalPenalties = 0;
     }
 
     public List<Card> getCards() {
@@ -30,25 +29,28 @@ public class Player {
     public int getTotalPoints() {
         return totalPoints;
     }
+
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
     }
-    public int getTotalPenalities() {
-        return totalPenalities;
-    }
-    public void setTotalPenalities(int totalPenalties) {
-        this.totalPenalities = totalPenalties;
+
+    public int getTotalPenalties() {
+        return totalPenalties;
     }
 
+    public void setTotalPenalties(int totalPenalties) {
+        this.totalPenalties = totalPenalties;
+    }
 
-
+    public void addCard(Card card) {
+        cards.add(card);
+    }
 
     public void addToTas(List<Card> cards) {
         tas.addAll(cards);
     }
 
     public Row chooseRowToRemove(List<Row> rows) {
-        // Afficher une boîte de dialogue pour choisir une série
         ChoiceDialog<Row> dialog = new ChoiceDialog<>(rows.get(0), rows);
         dialog.setTitle("Choisir une série");
         dialog.setHeaderText("Séries disponibles :");
@@ -57,6 +59,4 @@ public class Player {
         Optional<Row> result = dialog.showAndWait();
         return result.orElse(null);
     }
-
-
 }

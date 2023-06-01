@@ -11,12 +11,12 @@ public class Player {
     private List<Card> cards;
     private List<Card> tas;
     private int totalPoints;
-    private int totalPenalities;
+    private int totalPenalties;
 
     public Player() {
         this.cards = new ArrayList<>();
         this.tas = new ArrayList<>();
-        this.totalPenalities = 0;
+        this.totalPenalties = 0;
     }
 
     public List<Card> getCards() {
@@ -33,11 +33,11 @@ public class Player {
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
     }
-    public int getTotalPenalities() {
-        return totalPenalities;
+    public int getTotalPenalties() {
+        return totalPenalties;
     }
-    public void setTotalPenalities(int totalPenalities) {
-        this.totalPenalities = totalPenalities;
+    public void setTotalPenalties(int totalPenalties) {
+        this.totalPenalties = totalPenalties;
     }
 
 

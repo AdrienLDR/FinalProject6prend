@@ -91,17 +91,17 @@ public class GameController {
 
     public void calculateTotalPenalties() {
         for (Player player : players) {
-            int totalPenalities = 0;
+            int totalPenalties = 0;
 
             for (Card card : player.getCards()) {
                 int penalties = card.getPenalty();
-                totalPenalities += penalties;
+                totalPenalties += penalties;
             }
 
-            player.setTotalPenalities(totalPenalities);
+            player.setTotalPenalties(totalPenalties);
         }
 
-        players.sort(Comparator.comparingInt(Player::getTotalPenalities)); // Classement des joueurs par ordre croissant de pénalités
+        players.sort(Comparator.comparingInt(Player::getTotalPenalties)); // Classement des joueurs par ordre croissant de pénalités
     }
 
     public void endGame() {

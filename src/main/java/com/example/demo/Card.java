@@ -8,13 +8,13 @@ import java.util.List;
 
 class Card {
     private int number;
-    private int penality;
+    private int penalty;
     private ImageView cardImage;
     private int column;
 
     public Card(int number, ImageView cardImage) {
         this.number = number;
-        this.penality = calculatePenalty(number);
+        this.penalty = calculatePenalty(number);
         this.cardImage = cardImage;
     }
 
@@ -22,8 +22,8 @@ class Card {
         return number;
     }
 
-    public int getPenality() {
-        return penality;
+    public int getPenalty() {
+        return penalty;
     }
 
     public int getColumn() {
@@ -31,7 +31,7 @@ class Card {
     }
 
     public int getPoints(){
-        return penality;
+        return penalty;
     }
 
     public ImageView getCardImage() {

@@ -83,6 +83,17 @@ public class HelloApplication extends Application {
         deckIndivCard = new VBox();
         deckIndivCard.setPadding(new Insets(10, 10, 10, 10));
         deckIndivCard.setSpacing(10);
+        
+        pointBox = new VBox();
+        pointBox.setPadding(new Insets(10, 10, 10, 10));
+        pointBox.setSpacing(10);
+        pointBox.setAlignment(Pos.CENTER_LEFT);
+
+        Label pointLabel = new Label("Pénalités :");
+        pointLabel.setFont(Font.font(25));
+        pointLabel.setTextAlignment(TextAlignment.CENTER);
+
+        pointBox.getChildren().addAll(pointLabel);
 
         mainPane.setBottom(deckCard);
         mainPane.setLeft(deckIndivCard);
@@ -97,6 +108,8 @@ public class HelloApplication extends Application {
 
         Scene scene = new Scene(mainPane, 800, 600);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        
+        mainPane.setRight(pointBox);
 
         primaryStage.setScene(scene);
         primaryStage.show();

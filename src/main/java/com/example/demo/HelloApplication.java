@@ -38,7 +38,9 @@ public class HelloApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("6 Qui Prend");
-
+        String jonhnny = "src/main/resources/com/example/demo/Music.wav";
+        com.example.demo.Music music = new com.example.demo.Music();
+        music.playMusic(jonhnny);
         createModeSelectionScene();
     }
 

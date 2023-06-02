@@ -14,7 +14,7 @@ class Card {
 
     public Card(int number, ImageView cardImage) {
         this.number = number;
-        this.penalty = calculatePenalty(number);
+        this.penalty = calculatePoints(number);
         this.cardImage = cardImage;
     }
 
@@ -83,7 +83,7 @@ class Card {
     }
 
     // Calculate card penalties
-    public static int calculatePenalty(int number) {
+    public static int calculatePoints(int number) {
         if (number == 55) {
             return 7;
         } else if (number % 10 == 0) {

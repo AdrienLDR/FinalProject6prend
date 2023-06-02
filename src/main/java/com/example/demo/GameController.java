@@ -10,6 +10,7 @@ public class GameController {
     private List<Player> players;
     private Bot bot;
     private HelloApplication helloApplication;
+    private GameController gameController;
     private int currentPlayerIndex;
     private List<Label> scoreLabels; // Liste de Labels pour afficher les scores des joueurs
 
@@ -23,11 +24,16 @@ public class GameController {
     public Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);
     }
-
-    public void setScoreLabels(List<Label> scoreLabels) {
-        this.scoreLabels = scoreLabels;
+    public Bot getBot() {
+        return bot;
     }
 
+    public List<Row> getRows() {
+        return rows;
+    }
+
+
+    //permet d'afficher les scores à chaque tour
     public void updateScoreLabels() {
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
@@ -37,23 +43,7 @@ public class GameController {
         }
     }
 
-    public void calculatePoints() {
-        for (Player player : players) {
-            int totalPoints = 0;
-
-            for (Card card : player.getTas()) {
-                int points = card.getPoints();
-                totalPoints += points;
-            }
-
-            player.setTotalPoints(totalPoints);
-        }
-    }
-
-    public void distributeCards() {
-        Card.distributeCards(players);
-    }
-
+    //Règle de la carte la plus proche
     public Row getMinDifferenceRow(Card card) {
         int minDifference = Integer.MAX_VALUE;
         Row minRow = null;
@@ -72,6 +62,7 @@ public class GameController {
         return minRow;
     }
 
+    //Règle de la carte à la 6ème place qui mange la colonne
     public void handleCompletedSeries(Row row, Card card) {
         if (row.isFull()) {
             Player currentPlayer = getCurrentPlayer();
@@ -83,6 +74,7 @@ public class GameController {
         }
     }
 
+    //Si jamais il a une carte plus petite
     public void handleLowestCard(Player player, Card card) {
         Row chosenRow = player.chooseRowToRemove(rows); // Méthode pour que le joueur choisisse une série à ramasser
         player.addToTas(chosenRow.getCards()); // Ajoute les cartes à son tas
@@ -90,19 +82,29 @@ public class GameController {
         chosenRow.addCard(card); // Ajoute la nouvelle carte à la série
     }
 
-    public void calculateTotalPenalties() {
+    public void calculateTotalPoints() {
         for (Player player : players) {
-            int totalPoints = 0;
-
-            for (Card card : player.getCards()) {
-                int points = card.getPoints();
-                totalPoints += points;
-            }
-
+            int totalPoints = player.getTotalPoints();
+            int pointsThisTurn = calculatePointsThisTurn(player);
+            totalPoints += pointsThisTurn;
             player.setTotalPoints(totalPoints);
-        }
 
+            //afficher dans l'interface
+            int playerIndex = players.indexOf(player);
+            Label scoreLabel = scoreLabels.get(playerIndex);
+            scoreLabel.setText("Score du joueur " + (playerIndex + 1) + ": " + totalPoints);
+            player.setScoreLabels(List.of(scoreLabel));
+        }
         players.sort(Comparator.comparingInt(Player::getTotalPoints)); // Classement des joueurs par ordre croissant de pénalités
+    }
+
+    public int calculatePointsThisTurn(Player player) {
+        int pointsThisTurn = 0;
+        for (Card card : player.getTas()) {
+            int points = Card.calculatePoints(card.getNumber());
+            pointsThisTurn += points;
+        }
+        return pointsThisTurn;
     }
 
     public Player endGame() {
@@ -128,6 +130,7 @@ public class GameController {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -138,37 +141,37 @@ public class GameController {
     }
 
     public void playCard(Card playerCard) {
-        Player currentPlayer = getCurrentPlayer();
+        Player currentPlayer = gameController.getCurrentPlayer();
 
         if (currentPlayer.getCards().size() == 1) {
-            Card botCard = bot.findBestCard(rows);
+            Card botCard = gameController.getBot().findBestCard(gameController.getRows());
 
             playerCard.setFaceUp();
             botCard.setFaceUp();
 
-            Row playerRow = getMinDifferenceRow(playerCard);
-            Row botRow = getMinDifferenceRow(botCard);
+            Row playerRow = gameController.getMinDifferenceRow(playerCard);
+            Row botRow = gameController.getMinDifferenceRow(botCard);
 
-            handleCompletedSeries(playerRow, playerCard);
-            handleCompletedSeries(botRow, botCard);
+            gameController.handleCompletedSeries(playerRow, playerCard);
+            gameController.handleCompletedSeries(botRow, botCard);
 
             if (playerCard.getNumber() < botCard.getNumber()) {
-                handleLowestCard(currentPlayer, playerCard);
+                gameController.handleLowestCard(currentPlayer, playerCard);
             } else {
-                handleLowestCard(currentPlayer, botCard);
+                gameController.handleLowestCard(currentPlayer, botCard);
             }
 
-            calculatePoints();
-            calculateTotalPenalties();
+            gameController.calculateTotalPoints();
+            gameController.updateScoreLabels();
 
-            updateScoreLabels();
-
-            if (isGameFinished()) {
-                endGame();
+            if (gameController.isGameFinished()) {
+                Player winner = gameController.endGame();
+                helloApplication.winnerPage(winner); //lancer page du gagnant
             } else {
-                nextTurn();
+                gameController.nextTurn();
             }
         }
     }
+
 
 }

@@ -1,41 +1,56 @@
 package com.example.demo;
 
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 class Card {
     private int number;
-    private int penalty;
+    private int points;
     private ImageView cardImage;
+    private StackPane cardPane;
     private int column;
 
     public Card(int number, ImageView cardImage) {
         this.number = number;
-        this.penalty = calculatePenalty(number);
+        this.points = calculatePoints(number);
         this.cardImage = cardImage;
+        this.cardPane=createCardPane(cardImage);
+    }
+
+    public StackPane getCardPane(){
+        return cardPane;
     }
 
     public int getNumber() {
         return number;
     }
 
-    public int getPenalty() {
-        return penalty;
+    public int getPoints() {
+        return points;
+    }
+
+    public int setPoints(){
+        return points;
     }
 
     public int getColumn() {
         return column;
     }
 
-    public int getPoints(){
-        return penalty;
-    }
-
     public ImageView getCardImage() {
         return cardImage;
+    }
+
+    private StackPane createCardPane(ImageView cardImage) {
+        StackPane cardPane = new StackPane(cardImage);
+        cardPane.setAlignment(Pos.CENTER);
+        return cardPane;
     }
 
     public static List<Card> generateCards() {
@@ -83,7 +98,7 @@ class Card {
     }
 
     // Calculate card penalties
-    public static int calculatePenalty(int number) {
+    public static int calculatePoints(int number) {
         if (number == 55) {
             return 7;
         } else if (number % 10 == 0) {

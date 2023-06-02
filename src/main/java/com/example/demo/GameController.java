@@ -9,6 +9,7 @@ public class GameController {
     private List<Row> rows;
     private List<Player> players;
     private Bot bot;
+    private HelloApplication helloApplication;
     private int currentPlayerIndex;
     private List<Label> scoreLabels; // Liste de Labels pour afficher les scores des joueurs
 
@@ -91,20 +92,20 @@ public class GameController {
 
     public void calculateTotalPenalties() {
         for (Player player : players) {
-            int totalPenalties = 0;
+            int totalPoints = 0;
 
             for (Card card : player.getCards()) {
-                int penalties = card.getPenalty();
-                totalPenalties += penalties;
+                int points = card.getPoints();
+                totalPoints += points;
             }
 
-            player.setTotalPenalties(totalPenalties);
+            player.setTotalPoints(totalPoints);
         }
 
-        players.sort(Comparator.comparingInt(Player::getTotalPenalties)); // Classement des joueurs par ordre croissant de pénalités
+        players.sort(Comparator.comparingInt(Player::getTotalPoints)); // Classement des joueurs par ordre croissant de pénalités
     }
 
-    public void endGame() {
+    public Player endGame() {
         // Afficher le joueur gagnant avec le score le plus bas
         Player winner = players.get(0);
         int lowestScore = winner.getTotalPoints();
@@ -113,10 +114,12 @@ public class GameController {
             if (score < lowestScore) {
                 winner = player;
                 lowestScore = score;
+                return winner;
             }
         }
-        //TODO afficher dans l'interface le gagnant
+        return winner;
     }
+
 
     public boolean isGameFinished() {
         // Vérifier si les joueurs n'ont plus de cartes dans leurs mains
@@ -127,6 +130,8 @@ public class GameController {
         }
         return true;
     }
+
+
 
     public void nextTurn() {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();

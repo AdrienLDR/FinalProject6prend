@@ -33,7 +33,8 @@ public class HelloApplication extends Application {
     private VBox player2Cards;
     private Row[] rows;
     private List<StackPane> availableSlots; // Liste des emplacements disponibles
-
+    private List<Player> players;
+    private GameController gameController;
     private List<Card> deck;
 
 
@@ -295,6 +296,33 @@ public class HelloApplication extends Application {
             slot.getChildren().add(cardPane);
         }
     }
+
+
+    public void winnerPage(Player winner) {
+        // Créer la page du gagnant
+        VBox winnerPage = new VBox();
+        winnerPage.setAlignment(Pos.CENTER);
+        winnerPage.setSpacing(20);
+
+        // Label du gagnant
+        Label winnerLabel = new Label("Le gagnant est le joueur " + (players.indexOf(winner) + 1));
+        winnerLabel.setStyle("-fx-font-size: 24px;");
+
+        // Label du score du gagnant
+        Label scoreLabel = new Label("Score: " + winner.getTotalPoints());
+        scoreLabel.setStyle("-fx-font-size: 18px;");
+
+        winnerPage.getChildren().addAll(winnerLabel, scoreLabel);
+
+        // Afficher la page du gagnant dans une nouvelle fenêtre
+        Stage winnerStage = new Stage();
+        winnerStage.setTitle("Fin de la partie");
+        winnerStage.setScene(new Scene(winnerPage, 300, 200));
+        winnerStage.show();
+    }
+
+
+
 
     public static void main(String[] args) {
         launch(args);

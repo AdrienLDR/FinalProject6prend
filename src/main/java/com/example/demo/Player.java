@@ -1,4 +1,3 @@
-
 package com.example.demo;
 
 import javafx.scene.control.ChoiceDialog;
@@ -11,12 +10,11 @@ public class Player {
     private List<Card> cards;
     private List<Card> tas;
     private int totalPoints;
-    private int totalPenalties;
 
     public Player() {
         this.cards = new ArrayList<>();
         this.tas = new ArrayList<>();
-        this.totalPenalties = 0;
+        this.totalPoints = 0;
     }
 
     public List<Card> getCards() {
@@ -33,15 +31,6 @@ public class Player {
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
     }
-    public int getTotalPenalties() {
-        return totalPenalties;
-    }
-    public void setTotalPenalties(int totalPenalties) {
-        this.totalPenalties = totalPenalties;
-    }
-
-
-
 
     public void addToTas(List<Card> cards) {
         tas.addAll(cards);

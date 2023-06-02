@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="playcard good !">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/winner-view.fxml" afterDir="false" />
+    <list default="true" id="6d266e09-ab76-4484-af96-392ff4c9e7f5" name="Changes" comment="j'arrive pas a utiliser lees vaaaleurs meme apres beeaucoup trop d'essais">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,6 +227,7 @@
     <MESSAGE value="correction of the  penalities" />
     <MESSAGE value="Image menu logo" />
     <MESSAGE value="Les deux images sont mises" />
-    <option name="LAST_COMMIT_MESSAGE" value="Les deux images sont mises" />
+    <MESSAGE value="j'arrive pas a utiliser lees vaaaleurs meme apres beeaucoup trop d'essais" />
+    <option name="LAST_COMMIT_MESSAGE" value="j'arrive pas a utiliser lees vaaaleurs meme apres beeaucoup trop d'essais" />
   </component>
 </project>

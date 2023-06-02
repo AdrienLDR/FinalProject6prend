@@ -1,8 +1,10 @@
 package com.example.demo;
 
 import javafx.application.Application;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,15 +13,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class HelloApplication extends Application {
 
@@ -33,17 +33,15 @@ public class HelloApplication extends Application {
     private VBox player2Cards;
     private Row[] rows;
     private List<StackPane> availableSlots; // Liste des emplacements disponibles
+    private Map<StackPane, Card> cardPaneMap;
 
     private List<Card> deck;
 
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("6 Qui Prend");
-        String jonhnny = "src/main/resources/com/example/demo/Music.wav";
-        com.example.demo.Music music = new com.example.demo.Music();
-        music.playMusic(jonhnny);
         createModeSelectionScene();
     }
 
@@ -84,14 +82,15 @@ public class HelloApplication extends Application {
         primaryStage.show();
     }
 
-
-
     private void startGame(int numPlayers) {
         createRows();
         mainPane = new BorderPane();
         addPlayerLabels(mainPane);
         cardGridPane = new GridPane();
         cardGridPane.setAlignment(Pos.CENTER);
+
+        cardPaneMap = new HashMap<>();
+
         distributeCardsToPlayers(numPlayers);
         deckCard = new HBox();
         deckCard.setPadding(new Insets(10, 10, 10, 10));
@@ -122,20 +121,18 @@ public class HelloApplication extends Application {
         HBox imageBox = new HBox(imageView);
         imageBox.setAlignment(Pos.CENTER);
 
-
         VBox centerSlots = createCenterSlots();
         VBox centerBox = new VBox(imageBox, centerSlots); // Ajout de l'image et de la VBox centerSlots dans un conteneur VBox
         centerBox.setAlignment(Pos.CENTER);
         mainPane.setCenter(centerBox);
 
-        Scene scene = new Scene(mainPane, 800, 600);
+        Scene scene = new Scene(mainPane, 900, 700);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         mainPane.setRight(pointBox);
 
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 
     private VBox createLeftSlots() {
         VBox leftSlots = new VBox();
@@ -149,10 +146,36 @@ public class HelloApplication extends Application {
             StackPane slot = createSlot();
             availableSlots.add(slot); // Ajouter l'emplacement à la liste des emplacements disponibles
             leftSlots.getChildren().add(slot);
+
+            // Créer un Label pour afficher la valeur de la carte
+            Label cardValueLabel = new Label();
+            cardValueLabel.getStyleClass().add("card-value-label");
+            cardValueLabel.setVisible(false);
+            leftSlots.getChildren().add(cardValueLabel);
+
+            // Écouter les changements dans l'emplacement
+            slot.getChildren().addListener((ListChangeListener<Node>) change -> {
+                if (slot.getChildren().isEmpty()) {
+                    cardValueLabel.setVisible(false);
+                } else {
+                    // Obtenez la valeur de la carte à partir du CardPane associé
+                    StackPane cardPane = (StackPane) slot.getChildren().get(0);
+                    Card card = cardPaneMap.get(cardPane);
+                    if (card != null) {
+                        cardValueLabel.setText(String.valueOf(card.getNumber()));
+                        cardValueLabel.setVisible(true);
+                        compareLeftSlotCards(); // Appeler la fonction pour comparer les cartes dans les emplacements de gauche
+
+
+                    }
+                }
+                compareLeftSlotCards(); // Appeler la fonction pour comparer les cartes dans les emplacements de gauche
+            });
         }
 
         return leftSlots;
     }
+
 
     private VBox createCenterSlots() {
         VBox centerSlots = new VBox();
@@ -174,6 +197,11 @@ public class HelloApplication extends Application {
             slot.getChildren().add(cardPane);
             row.getChildren().add(slot);
 
+            // Créer un label pour afficher la valeur de la carte
+            Label cardValueLabel = new Label(String.valueOf(randomCard.getNumber()));
+            cardValueLabel.getStyleClass().add("card-value-label");
+            row.getChildren().add(cardValueLabel);
+
             for (int j = 1; j < 6; j++) {
                 // Créer un emplacement vide pour les autres colonnes
                 StackPane emptySlot = createSlot();
@@ -186,11 +214,20 @@ public class HelloApplication extends Application {
         return centerSlots;
     }
 
-
     private StackPane createSlot() {
         StackPane slot = new StackPane();
         slot.setPrefSize(68, 85);
         slot.getStyleClass().add("slot");
+
+        // Vérifie si l'emplacement est rempli
+        slot.getChildren().addListener((ListChangeListener<Node>) change -> {
+            if (slot.getChildren().isEmpty()) {
+                slot.getStyleClass().remove("filled-slot");
+            } else {
+                slot.getStyleClass().add("filled-slot");
+            }
+        });
+
         return slot;
     }
 
@@ -282,18 +319,90 @@ public class HelloApplication extends Application {
                 moveCardToSlot(cardPane); // Appeler la fonction pour déplacer la carte vers un emplacement disponible
             }
         });
+        cardPaneMap.put(cardPane, card); // Ajouter la correspondance CardPane -> Card
 
         return cardPane;
     }
 
     private void moveCardToSlot(StackPane cardPane) {
         if (!availableSlots.isEmpty()) {
-            StackPane slot = availableSlots.get(0); // Obtenir le premier emplacement disponible de la liste
-            availableSlots.remove(0); // Supprimer cet emplacement de la liste des emplacements disponibles
+            StackPane slot = availableSlots.get(0);
+            availableSlots.remove(0);
+
+            Card card = cardPaneMap.get(cardPane); // Récupérer la carte associée au CardPane
 
             // Déplacer la carte vers l'emplacement disponible
             slot.getChildren().add(cardPane);
+
+            if (availableSlots.isEmpty()) {
+                compareLeftSlotCards(); // Appeler la fonction pour comparer les cartes dans les emplacements de gauche
+            }
         }
+    }
+
+    private void compareLeftSlotCards() {
+        if (availableSlots.size() >= 2) {
+            StackPane slot1 = availableSlots.get(0);
+            StackPane slot2 = availableSlots.get(1);
+
+            Card card1 = cardPaneMap.get(slot1.getChildren().get(0));
+            Card card2 = cardPaneMap.get(slot2.getChildren().get(0));
+
+            int cardValue1 = card1.getNumber();
+            int cardValue2 = card2.getNumber();
+
+            Label cardValueLabel1 = (Label) slot1.getChildren().get(1);
+            Label cardValueLabel2 = (Label) slot2.getChildren().get(1);
+
+            cardValueLabel1.setText(String.valueOf(cardValue1));
+            cardValueLabel2.setText(String.valueOf(cardValue2));
+
+            Label comparisonLabel = new Label();
+            comparisonLabel.setFont(Font.font(20));
+
+            if (cardValue1 > cardValue2) {
+                comparisonLabel.setText("La carte de gauche est plus grande");
+                comparisonLabel.setTextFill(Color.BLUE);
+            } else if (cardValue1 < cardValue2) {
+                comparisonLabel.setText("La carte de droite est plus grande");
+                comparisonLabel.setTextFill(Color.BLUE);
+            } else {
+                comparisonLabel.setText("Les cartes sont de même valeur");
+                comparisonLabel.setTextFill(Color.BLACK);
+            }
+
+            if (pointBox.getChildren().size() > 1) {
+                pointBox.getChildren().remove(1);
+            }
+            pointBox.getChildren().add(comparisonLabel);
+        }
+    }
+
+
+    private int getRowValue(HBox row) {
+        int rowValue = 0;
+        for (Node slot : row.getChildren()) {
+            if (slot instanceof StackPane) {
+                StackPane stackPane = (StackPane) slot;
+                if (!stackPane.getChildren().isEmpty()) {
+                    Card card = cardPaneMap.get(stackPane.getChildren().get(0));
+                    rowValue += card.getNumber();
+                }
+            }
+        }
+        return rowValue;
+    }
+
+    private StackPane getEmptySlotInRow(HBox row) {
+        for (Node slot : row.getChildren()) {
+            if (slot instanceof StackPane) {
+                StackPane stackPane = (StackPane) slot;
+                if (stackPane.getChildren().isEmpty()) {
+                    return stackPane;
+                }
+            }
+        }
+        return null;
     }
 
     public static void main(String[] args) {

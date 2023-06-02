@@ -3,7 +3,7 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bot {
+public class Bot extends Player {
     private List<Card> hand;
     private int score;
 

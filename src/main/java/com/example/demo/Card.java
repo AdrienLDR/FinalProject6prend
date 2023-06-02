@@ -22,10 +22,6 @@ class Card {
         return number;
     }
 
-    public int getValue() {
-        return number;
-    }
-
     public int getPenalty() {
         return penalty;
     }

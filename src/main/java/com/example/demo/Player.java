@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ public class Player {
     private List<Card> cards;
     private List<Card> tas;
     private int totalPoints;
+    private List<Label> scoreLabels;
 
     public Player() {
         this.cards = new ArrayList<>();
@@ -32,6 +34,10 @@ public class Player {
         this.totalPoints = totalPoints;
     }
 
+    public void setScoreLabels(List<Label> scoreLabels) {
+        this.scoreLabels = scoreLabels;
+    }
+
     public void addToTas(List<Card> cards) {
         tas.addAll(cards);
     }
@@ -46,7 +52,4 @@ public class Player {
         Optional<Row> result = dialog.showAndWait();
         return result.orElse(null);
     }
-
-
-
 }

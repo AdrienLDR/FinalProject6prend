@@ -23,6 +23,7 @@ import java.util.*;
 
 public class HelloApplication extends Application {
 
+    private Map<Card, String> cardChoices;
     private BorderPane mainPane;
     private Stage primaryStage;
     private GridPane cardGridPane;
@@ -34,7 +35,9 @@ public class HelloApplication extends Application {
     private Row[] rows;
     private List<StackPane> availableSlots; // Liste des emplacements disponibles
     private Map<StackPane, Card> cardPaneMap;
+    private List<Card> cardsPlayed;
     private List<Player> players;
+    private VBox leftSlots;
 
 
     @Override
@@ -88,6 +91,7 @@ public class HelloApplication extends Application {
         cardGridPane = new GridPane();
         cardGridPane.setAlignment(Pos.CENTER);
 
+        cardsPlayed = new ArrayList<>();
         cardPaneMap = new HashMap<>();
 
         distributeCardsToPlayers(numPlayers);
@@ -109,7 +113,7 @@ public class HelloApplication extends Application {
         pointBox.getChildren().addAll(pointLabel);
         mainPane.setBottom(deckCard);
         mainPane.setLeft(deckIndivCard);
-        VBox leftSlots = createLeftSlots();
+        leftSlots = createLeftSlots();
         deckIndivCard.getChildren().add(leftSlots);
 
         // Création de l'image "image.png"
@@ -169,6 +173,7 @@ public class HelloApplication extends Application {
                     if (card != null) {
                         cardValueLabel.setText(String.valueOf(card.getNumber()));
                         cardValueLabel.setVisible(true);
+                        cardsPlayed.add(card);
                         compareLeftSlotCards(); // Appeler la fonction pour comparer les cartes dans les emplacements de gauche
 
 
@@ -346,21 +351,14 @@ public class HelloApplication extends Application {
     }
 
     private void compareLeftSlotCards() {
-        if (availableSlots.size() >= 2) {
-            StackPane slot1 = availableSlots.get(0);
-            StackPane slot2 = availableSlots.get(1);
+        if (cardsPlayed.size() >= 2) {
+            Card card1 = cardsPlayed.get(0);
+            Card card2 = cardsPlayed.get(1);
 
-            Card card1 = cardPaneMap.get(slot1.getChildren().get(0));
-            Card card2 = cardPaneMap.get(slot2.getChildren().get(0));
-
+            System.out.println(card1.getNumber());
             int cardValue1 = card1.getNumber();
             int cardValue2 = card2.getNumber();
 
-            Label cardValueLabel1 = (Label) slot1.getChildren().get(1);
-            Label cardValueLabel2 = (Label) slot2.getChildren().get(1);
-
-            cardValueLabel1.setText(String.valueOf(cardValue1));
-            cardValueLabel2.setText(String.valueOf(cardValue2));
 
             Label comparisonLabel = new Label();
             comparisonLabel.setFont(Font.font(20));
